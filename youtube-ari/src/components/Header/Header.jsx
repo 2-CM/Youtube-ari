@@ -4,7 +4,7 @@ import HeaderUserMenu from "./HeaderUserMenu";
 
 const Header = () => {
   return (
-    <header className="z-2020 fixed flex h-14 w-full items-center justify-between px-4">
+    <header className="z-2020 t-0 fixed flex h-14 w-full items-center justify-between bg-white px-4">
       <HeaderLogo />
       <HeaderSearchBar />
       <HeaderUserMenu />
