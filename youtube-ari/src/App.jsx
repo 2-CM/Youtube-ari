@@ -1,12 +1,15 @@
-import './App.css'
+import "./App.css";
+
+import { Route, Routes } from "react-router-dom";
+
+import Home from "./pages/Home";
 
 function App() {
-
   return (
     <>
-      Youtube-ari
+      <Home />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
