@@ -16,7 +16,7 @@ const HeaderSearchBar = () => {
               autoCorrect="off"
               aria-expanded="false"
               aria-controls="autocomplete-list"
-              className="text-4 peer my-0 w-full appearance-none border-none bg-transparent py-px font-normal leading-[22px] antialiased shadow-none outline-none"
+              className="peer my-0 w-full appearance-none border-none bg-transparent py-px text-base font-normal leading-[22px] antialiased shadow-none outline-none"
             />
             <img
               src={searchIcon}
@@ -33,18 +33,25 @@ const HeaderSearchBar = () => {
           <img
             src={searchIcon}
             alt="Search Btn"
-            className="inline-flex h-6 w-6 items-center justify-center"
+            className="inline-flex h-6 w-6"
           />
         </button>
       </div>
-      <div className="ml-3">
-        <button className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#f2f2f2] hover:bg-[#d9d9d9]">
+      <div className="group relative ml-3 rounded-full bg-[#f2f2f2] hover:bg-[#d9d9d9]">
+        <button className="inline-flex h-10 w-10 items-center justify-center">
           <img
             src={voiceSearchIcon}
             alt="Voice Search Btn"
-            className="flex h-6 w-6 items-center justify-center"
+            className="h-6 w-6"
           />
         </button>
+        <div
+          role="tooltip"
+          aria-label="tooltip"
+          className="absolute -left-14 top-12 z-[1002] m-2 cursor-default whitespace-nowrap rounded-sm bg-[#616161] p-2 text-xs text-white opacity-0 transition-opacity duration-200 ease-in-out group-hover:opacity-90"
+        >
+          Search with your voice
+        </div>
       </div>
     </div>
   );
