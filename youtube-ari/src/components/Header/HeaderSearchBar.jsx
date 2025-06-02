@@ -1,4 +1,5 @@
-import search from "../../assets/search-btn.svg";
+import searchIcon from "../../assets/search-icon.svg";
+import voiceSearchIcon from "../../assets/voice-search-icon.svg";
 
 const HeaderSearchBar = () => {
   return (
@@ -18,7 +19,7 @@ const HeaderSearchBar = () => {
               className="text-4 peer my-0 w-full appearance-none border-none bg-transparent py-px font-normal leading-[22px] antialiased shadow-none outline-none"
             />
             <img
-              src={search}
+              src={searchIcon}
               alt="Search Icon"
               className="pointer-events-none absolute left-4 top-1/2 hidden h-5 w-5 translate-y-[-50%] peer-focus:block"
             />
@@ -30,12 +31,20 @@ const HeaderSearchBar = () => {
           className="m-0 w-16 cursor-pointer justify-center rounded-r-[40px] border border-[#d3d3d3] bg-[#f8f8f8] p-0 text-inherit hover:border-[#c6c6c6] hover:bg-[#f0f0f0]"
         >
           <img
-            src={search}
+            src={searchIcon}
             alt="Search Btn"
             className="inline-flex h-6 w-6 items-center justify-center"
           />
         </button>
-        <div></div>
+      </div>
+      <div className="ml-3">
+        <button className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#f2f2f2] hover:bg-[#d9d9d9]">
+          <img
+            src={voiceSearchIcon}
+            alt="Voice Search Btn"
+            className="flex h-6 w-6 items-center justify-center"
+          />
+        </button>
       </div>
     </div>
   );
