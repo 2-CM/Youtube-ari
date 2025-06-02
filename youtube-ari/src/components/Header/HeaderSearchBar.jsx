@@ -38,7 +38,7 @@ const HeaderSearchBar = () => {
         </button>
       </div>
       <div className="group relative ml-3 rounded-full bg-[#f2f2f2] hover:bg-[#d9d9d9]">
-        <button className="inline-flex h-10 w-10 items-center justify-center">
+        <button className="inline-flex h-10 w-10 items-center justify-center rounded-full">
           <img
             src={voiceSearchIcon}
             alt="Voice Search Btn"
