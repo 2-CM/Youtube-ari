@@ -5,7 +5,7 @@ const HeaderSearchBar = () => {
   return (
     <div className="flex flex-shrink flex-grow-0 basis-[732px] flex-row items-center">
       <div className="relative ml-10 flex h-10 flex-1 px-1">
-        <div className="relative ml-8 flex flex-1 cursor-text items-center rounded-[40px_0_0_40px] border border-r-0 border-[#c6c6c6] bg-white pl-4 pr-1 shadow-[inset_0_1px_2px_#eee] focus-within:ml-0 focus-within:border-r focus-within:border-[#1c62b9] focus-within:py-[2px] focus-within:pl-12 focus-within:pr-1 focus-within:shadow-[inset_0_1px_2px_rgba(0,0,0,0.3)]">
+        <div className="searchContainer">
           <form action="/result" className="flex flex-1">
             <input
               name="search_query"
@@ -48,7 +48,7 @@ const HeaderSearchBar = () => {
         <div
           role="tooltip"
           aria-label="tooltip"
-          className="absolute -left-14 top-12 z-[1002] m-2 cursor-default whitespace-nowrap rounded-sm bg-[#616161] p-2 text-xs text-white opacity-0 transition-opacity duration-200 ease-in-out group-hover:opacity-90"
+          className="tooltip -left-14 top-12"
         >
           Search with your voice
         </div>
