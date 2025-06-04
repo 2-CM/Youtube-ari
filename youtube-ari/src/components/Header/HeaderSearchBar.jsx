@@ -15,19 +15,21 @@ const HeaderSearchBar = () => {
               autoCorrect="off"
               aria-expanded="false"
               aria-controls="autocomplete-list"
-              className="peer my-0 w-full appearance-none border-none bg-transparent py-px text-base font-normal leading-[22px] antialiased shadow-none outline-none"
+              className="peer my-0 w-full py-px text-base font-normal"
             />
-            <Search
-              strokeWidth={1}
-              alt="Search Icon"
-              className="pointer-events-none absolute left-4 top-1/2 hidden h-5 w-5 translate-y-[-50%] peer-focus:block"
-            />
+            <div className="absolute left-4 top-1/2 hidden translate-y-[-50%] peer-focus:block">
+              <Search
+                strokeWidth={1}
+                alt="Search Icon"
+                className="pointer-events-none h-5 w-5"
+              />
+            </div>
           </form>
         </div>
         <button
           aria-label="Search Btn"
           title="Search"
-          className="m-0 w-16 cursor-pointer justify-center rounded-r-[40px] border border-[#d3d3d3] bg-[#f8f8f8] p-0 text-inherit hover:border-[#c6c6c6] hover:bg-[#f0f0f0]"
+          className="w-16 rounded-r-[40px] border border-[#d3d3d3] bg-[#f8f8f8] hover:border-[#c6c6c6] hover:bg-[#f0f0f0]"
         >
           <Search
             alt="Search Btn"
@@ -43,7 +45,7 @@ const HeaderSearchBar = () => {
         <div
           role="tooltip"
           aria-label="tooltip"
-          className="tooltip -left-14 top-12"
+          className="tooltip -left-14 top-12 group-hover:opacity-90"
         >
           Search with your voice
         </div>

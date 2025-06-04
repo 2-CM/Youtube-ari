@@ -4,7 +4,7 @@ const HeaderUserMenu = () => {
   return (
     <div className="flex items-center justify-center">
       <ThemeToggleSwitch />
-      <button className="avatarBtn border-none px-2 outline-none">
+      <button className="avatarBtn px-2">
         <div className="avatarImageWrapper">
           <img
             src=""

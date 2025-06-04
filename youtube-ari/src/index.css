@@ -1,4 +1,17 @@
 @tailwind base;
+
+input {
+  @apply appearance-none border-none bg-transparent shadow-none outline-none;
+}
+
+a {
+  @apply cursor-pointer no-underline;
+}
+
+button {
+  @apply m-0 cursor-pointer p-0;
+}
+
 @tailwind components;
 
 .searchContainer {
@@ -15,7 +28,7 @@
 }
 
 .tooltipAnimation {
-  @apply opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-90;
+  @apply opacity-0 transition-opacity duration-300 ease-in-out;
 }
 
 .avatarBtn {
@@ -23,7 +36,7 @@
 }
 
 .avatarImageWrapper {
-  @apply mx-2 h-8 w-8 cursor-pointer overflow-hidden rounded-full;
+  @apply mx-2 h-8 w-8 overflow-hidden rounded-full;
 }
 
 .avatarBtn:focus .avatarImageWrapper {
