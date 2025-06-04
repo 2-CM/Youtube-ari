@@ -15,11 +15,11 @@ button {
 @tailwind components;
 
 .searchContainer {
-  @apply relative ml-8 flex flex-1 cursor-text items-center rounded-[40px_0_0_40px] border border-r-0 border-[#c6c6c6] bg-white pl-4 pr-1 shadow-[inset_0_1px_2px_#eee];
+  @apply border-bdDefault relative ml-8 flex flex-1 cursor-text items-center rounded-[40px_0_0_40px] border border-r-0 bg-white pl-4 pr-1 shadow-[inset_0_1px_2px_#eee];
 }
 
 .searchContainer:focus-within {
-  @apply ml-0 border-r border-[#1c62b9] py-[2px] pl-12 pr-1 shadow-[inset_0_1px_2px_rgba(0,0,0,0.3)];
+  @apply border-bdFocus ml-0 border-r py-[2px] pl-12 pr-1 shadow-[inset_0_1px_2px_rgba(0,0,0,0.3)];
 }
 
 .tooltip {
@@ -40,7 +40,7 @@ button {
 }
 
 .avatarBtn:focus .avatarImageWrapper {
-  @apply shadow-[0_0_0_1px_#1c62b9];
+  @apply shadow-[0_0_0_1px_bd-bdFocus];
 }
 
 @tailwind utilities;
