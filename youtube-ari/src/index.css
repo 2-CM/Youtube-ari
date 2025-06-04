@@ -1,3 +1,46 @@
 @tailwind base;
+
+input {
+  @apply appearance-none border-none bg-transparent shadow-none outline-none;
+}
+
+a {
+  @apply cursor-pointer no-underline;
+}
+
+button {
+  @apply m-0 cursor-pointer p-0;
+}
+
 @tailwind components;
+
+.searchContainer {
+  @apply border-bdDefault relative ml-8 flex flex-1 cursor-text items-center rounded-[40px_0_0_40px] border border-r-0 bg-white pl-4 pr-1 shadow-[inset_0_1px_2px_#eee];
+}
+
+.searchContainer:focus-within {
+  @apply border-bdFocus ml-0 border-r py-[2px] pl-12 pr-1 shadow-[inset_0_1px_2px_rgba(0,0,0,0.3)];
+}
+
+.tooltip {
+  @apply pointer-events-none absolute z-[1002] m-2 whitespace-nowrap rounded-sm bg-[#616161] p-2 text-xs text-white;
+  @apply tooltipAnimation;
+}
+
+.tooltipAnimation {
+  @apply opacity-0 transition-opacity duration-300 ease-in-out;
+}
+
+.avatarBtn {
+  @apply flex items-center justify-center;
+}
+
+.avatarImageWrapper {
+  @apply mx-2 h-8 w-8 overflow-hidden rounded-full;
+}
+
+.avatarBtn:focus .avatarImageWrapper {
+  @apply shadow-[0_0_0_1px_#1c62b9];
+}
+
 @tailwind utilities;
