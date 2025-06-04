@@ -23,7 +23,7 @@ button {
 }
 
 .tooltip {
-  @apply absolute z-[1002] m-2 cursor-default select-none whitespace-nowrap rounded-sm bg-[#616161] p-2 text-xs text-white;
+  @apply pointer-events-none absolute z-[1002] m-2 whitespace-nowrap rounded-sm bg-[#616161] p-2 text-xs text-white;
   @apply tooltipAnimation;
 }
 
