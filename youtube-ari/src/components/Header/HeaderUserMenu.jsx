@@ -1,7 +1,10 @@
+import ThemeToggleSwitch from "../ThemeToggleSwitch";
+
 const HeaderUserMenu = () => {
   return (
-    <div className="flex">
-      <button className="avatarBtn border-none px-[6px] py-[1px] outline-none">
+    <div className="flex items-center justify-center">
+      <ThemeToggleSwitch />
+      <button className="avatarBtn border-none px-2 outline-none">
         <div className="avatarImageWrapper">
           <img
             src=""
