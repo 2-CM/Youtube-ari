@@ -29,7 +29,7 @@ const HeaderSearchBar = () => {
         <button
           aria-label="Search Btn"
           title="Search"
-          className="border-bdDefault bg-bgDefault hover:bg-bgHover w-16 rounded-r-[40px] border"
+          className="border-ytGray-60 bg-ytGray-10 hover:bg-ytGray-20 hover:border-ytGray-70 w-16 rounded-r-[40px] border"
         >
           <Search
             alt="Search Btn"
@@ -38,7 +38,7 @@ const HeaderSearchBar = () => {
           />
         </button>
       </div>
-      <div className="hover:bg-bgHover bg-bgDefault group relative ml-3 rounded-full">
+      <div className="bg-ytGray-30 hover:bg-ytGray-50 group relative ml-3 rounded-full">
         <button className="inline-flex h-10 w-10 items-center justify-center rounded-full">
           <Mic strokeWidth={1.25} alt="Voice Search Btn" className="h-6 w-6" />
         </button>

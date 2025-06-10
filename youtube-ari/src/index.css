@@ -15,15 +15,15 @@ button {
 @tailwind components;
 
 .searchContainer {
-  @apply border-bdDefault relative ml-8 flex flex-1 cursor-text items-center rounded-[40px_0_0_40px] border border-r-0 bg-white pl-4 pr-1 shadow-[inset_0_1px_2px_#eee];
+  @apply border-ytGray-70 relative ml-8 flex flex-1 cursor-text items-center rounded-[40px_0_0_40px] border border-r-0 bg-white pl-4 pr-1 shadow-[inset_0_1px_2px_#eee];
 }
 
 .searchContainer:focus-within {
-  @apply border-bdFocus ml-0 border-r py-[2px] pl-12 pr-1 shadow-[inset_0_1px_2px_rgba(0,0,0,0.3)];
+  @apply ml-0 border-r border-[#1c62b9] py-[2px] pl-12 pr-1 shadow-[inset_0_1px_2px_rgba(0,0,0,0.3)];
 }
 
 .tooltip {
-  @apply pointer-events-none absolute z-[1002] m-2 whitespace-nowrap rounded-sm bg-[#616161] p-2 text-xs text-white;
+  @apply bg-ytGray-90 pointer-events-none absolute z-[1002] m-2 whitespace-nowrap rounded-sm p-2 text-xs text-white;
   @apply tooltipAnimation;
 }
 
@@ -41,6 +41,18 @@ button {
 
 .avatarBtn:focus .avatarImageWrapper {
   @apply shadow-[0_0_0_1px_#1c62b9];
+}
+
+.sidebarIconWrapper {
+  @apply hover:bg-ytGray-30 active:bg-ytGray-50 relative inline-block rounded-lg bg-transparent;
+}
+
+.sidebarIconLink {
+  @apply flex w-16 flex-col items-center justify-center py-4 outline-none;
+}
+
+.sidebarIconText {
+  @apply block max-w-full overflow-ellipsis whitespace-nowrap text-[10px] font-normal;
 }
 
 @tailwind utilities;
