@@ -43,4 +43,16 @@ button {
   @apply shadow-[0_0_0_1px_#1c62b9];
 }
 
+.sidebarIconWrapper {
+  @apply hover:bg-ytGray-30 active:bg-ytGray-50 relative inline-block rounded-lg bg-transparent;
+}
+
+.sidebarIconLink {
+  @apply flex w-16 flex-col items-center justify-center py-4 outline-none;
+}
+
+.sidebarIconText {
+  @apply block max-w-full overflow-ellipsis whitespace-nowrap text-[10px] font-normal;
+}
+
 @tailwind utilities;
