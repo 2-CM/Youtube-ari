@@ -1,8 +1,13 @@
 import { EllipsisVertical } from "lucide-react";
-import thumnail from "../assets/mock_thumnail.png";
-import channelImage from "../assets/mock_channelImage.jpg";
 
-const VideoCard = () => {
+const VideoCard = ({
+  title,
+  thumbnail,
+  channelImage,
+  channelName,
+  views,
+  publishedAt,
+}) => {
   return (
     <div className="relative mx-2 mb-8">
       <div className="w-full min-w-[327px] max-w-[700px]">
@@ -10,7 +15,7 @@ const VideoCard = () => {
           <div className="relative w-full">
             <a href="/" className="block overflow-hidden rounded-xl">
               <img
-                src={thumnail}
+                src={thumbnail}
                 alt="Video Thumnail"
                 className="h-full w-full object-cover"
               />
@@ -32,21 +37,20 @@ const VideoCard = () => {
               <h3 className="mb-1 mt-3">
                 <a href="/" className="block">
                   <div className="line-clamp-2 max-h-11 text-ellipsis whitespace-normal">
-                    𝒑𝒍𝒂𝒚𝒍𝒊𝒔𝒕 이게 진짜 노동요지! 시원하게 그루브 한 잔해🍸😎 |
-                    쌈뽕한 그루브 & 베이스라인 팝송 플리
+                    {title}
                   </div>
                 </a>
               </h3>
               <div className="flex flex-col text-left text-sm text-ytGray-90">
                 <div className="flex flex-wrap items-center">
                   <a href="/" className="hover:text-black">
-                    모카냥 MoccaCat
+                    {channelName}
                   </a>
                 </div>
                 <div className="line-clamp-2 flex flex-row text-ellipsis">
-                  <span>29K views </span>
+                  <span>{views}</span>
                   <span className="before:mx-1 before:content-['•']">
-                    13 days ago
+                    {publishedAt}
                   </span>
                 </div>
               </div>
