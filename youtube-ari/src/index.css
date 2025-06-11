@@ -15,7 +15,7 @@ button {
 @tailwind components;
 
 .searchContainer {
-  @apply border-ytGray-70 relative ml-8 flex flex-1 cursor-text items-center rounded-[40px_0_0_40px] border border-r-0 bg-white pl-4 pr-1 shadow-[inset_0_1px_2px_#eee];
+  @apply relative ml-8 flex flex-1 cursor-text items-center rounded-[40px_0_0_40px] border border-r-0 border-ytGray-70 bg-white pl-4 pr-1 shadow-[inset_0_1px_2px_#eee];
 }
 
 .searchContainer:focus-within {
@@ -23,7 +23,7 @@ button {
 }
 
 .tooltip {
-  @apply bg-ytGray-90 pointer-events-none absolute z-[1002] m-2 whitespace-nowrap rounded-sm p-2 text-xs text-white;
+  @apply pointer-events-none absolute z-[1002] m-2 whitespace-nowrap rounded-sm bg-ytGray-90 p-2 text-xs text-white;
   @apply tooltipAnimation;
 }
 
@@ -44,7 +44,7 @@ button {
 }
 
 .sidebarIconWrapper {
-  @apply hover:bg-ytGray-30 active:bg-ytGray-50 relative inline-block rounded-lg bg-transparent;
+  @apply relative inline-block rounded-lg bg-transparent hover:bg-ytGray-30 active:bg-ytGray-50;
 }
 
 .sidebarIconLink {
