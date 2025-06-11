@@ -14,6 +14,8 @@ button {
 
 @tailwind components;
 
+/***** Header *****/
+/** HeaderSearchBar **/
 .searchContainer {
   @apply relative ml-8 flex flex-1 cursor-text items-center rounded-[40px_0_0_40px] border border-r-0 border-ytGray-70 bg-white pl-4 pr-1 shadow-[inset_0_1px_2px_#eee];
 }
@@ -31,6 +33,7 @@ button {
   @apply opacity-0 transition-opacity duration-300 ease-in-out;
 }
 
+/** HeaderUserMenu **/
 .avatarBtn {
   @apply flex items-center justify-center;
 }
@@ -43,6 +46,7 @@ button {
   @apply shadow-[0_0_0_1px_#1c62b9];
 }
 
+/***** SideBar *****/
 .sidebarIconWrapper {
   @apply relative inline-block rounded-lg bg-transparent hover:bg-ytGray-30 active:bg-ytGray-50;
 }
@@ -53,6 +57,11 @@ button {
 
 .sidebarIconText {
   @apply block max-w-full overflow-ellipsis whitespace-nowrap text-[10px] font-normal;
+}
+
+/***** VideoGrid *****/
+.videoGridCols {
+  @apply grid w-full grid-cols-1 justify-start pt-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3;
 }
 
 @tailwind utilities;
