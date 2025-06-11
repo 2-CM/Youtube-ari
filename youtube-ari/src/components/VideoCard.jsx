@@ -10,7 +10,7 @@ const VideoCard = ({
 }) => {
   return (
     <div className="relative mx-2 mb-8">
-      <div className="w-full min-w-[327px] max-w-[700px]">
+      <div className="w-full min-w-0 max-w-[700px]">
         <div className="relative flex flex-col">
           <div className="relative w-full">
             <a href="/" className="block overflow-hidden rounded-xl">
