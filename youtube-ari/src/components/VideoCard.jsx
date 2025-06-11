@@ -64,7 +64,7 @@ const VideoCard = ({
               </div>
             </div>
             <div className="absolute -right-3 top-1">
-              <button className="h-10 w-10">
+              <button className="ripple-effect h-10 w-10 rounded-full">
                 <div className="flex items-center justify-center">
                   <EllipsisVertical
                     strokeWidth={1}
