@@ -9,14 +9,17 @@ const VideoCard = ({
   publishedAt,
 }) => {
   return (
-    <div className="relative mx-2 mb-8">
+    <div className="group relative mx-2 mb-8 cursor-pointer">
       <div className="w-full min-w-0 max-w-[700px]">
         <div className="relative flex flex-col">
           <div className="relative w-full">
-            <a href="/" className="block overflow-hidden rounded-xl">
+            <a
+              href="/"
+              className="block aspect-video overflow-hidden rounded-xl"
+            >
               <img
                 src={thumbnail}
-                alt="Video Thumnail"
+                alt="Video Thumbnail"
                 className="h-full w-full object-cover"
               />
             </a>
@@ -77,6 +80,9 @@ const VideoCard = ({
             </div>
           </div>
         </div>
+      </div>
+      <div className="pointer-events-none absolute -inset-1">
+        <div className="absolute inset-0 rounded-xl bg-black opacity-0 transition-opacity duration-300 ease-out group-active:opacity-10"></div>
       </div>
     </div>
   );
