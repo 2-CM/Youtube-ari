@@ -4,7 +4,7 @@ import HeaderUserMenu from "./HeaderUserMenu";
 
 const Header = () => {
   return (
-    <header className="fixed top-0 z-[2020] w-full bg-white">
+    <header className="fixed top-0 z-[2020] w-full bg-[rgba(255,255,255,0.9)] backdrop-blur-2xl">
       <div className="flex h-14 flex-row items-center justify-between px-4">
         <HeaderLogo />
         <HeaderSearchBar />
