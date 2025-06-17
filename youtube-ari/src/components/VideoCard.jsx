@@ -9,7 +9,7 @@ const VideoCard = ({
   publishedAt,
 }) => {
   return (
-    <div className="group relative mx-2 mb-8 cursor-pointer">
+    <div className="group/card relative mx-2 mb-8 cursor-pointer">
       <div className="w-full min-w-0 max-w-[700px]">
         <div className="relative flex flex-col">
           <div className="relative w-full">
@@ -46,17 +46,21 @@ const VideoCard = ({
                 </a>
               </h3>
               <div className="flex flex-col text-left text-sm text-ytGray-90">
-                <div className="group flex flex-wrap items-center">
-                  <a href="/" title={channelName} className="hover:text-black">
-                    {channelName}
-                  </a>
-                  <div
-                    role="tooltip"
-                    aria-label="tooltip"
-                    className="tooltip -top-1 left-8 group-hover:opacity-90"
+                <div className="flex flex-wrap items-center">
+                  <a
+                    href="/"
+                    title={channelName}
+                    className="group hover:text-black"
                   >
                     {channelName}
-                  </div>
+                    <div
+                      role="tooltip"
+                      aria-label="tooltip"
+                      className="tooltip -top-1 left-8 group-hover:opacity-90"
+                    >
+                      {channelName}
+                    </div>
+                  </a>
                 </div>
                 <div className="line-clamp-2 flex flex-row text-ellipsis">
                   <span>{views}</span>
@@ -82,7 +86,7 @@ const VideoCard = ({
         </div>
       </div>
       <div className="pointer-events-none absolute -inset-1">
-        <div className="absolute inset-0 rounded-xl bg-black opacity-0 transition-opacity duration-300 ease-out group-active:opacity-10"></div>
+        <div className="absolute inset-0 rounded-xl bg-black opacity-0 transition-opacity duration-300 ease-out group-active/card:opacity-10"></div>
       </div>
     </div>
   );
