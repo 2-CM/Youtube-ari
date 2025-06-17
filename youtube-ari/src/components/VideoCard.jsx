@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { EllipsisVertical } from "lucide-react";
 
 const VideoCard = ({
@@ -8,8 +9,22 @@ const VideoCard = ({
   views,
   publishedAt,
 }) => {
+  const [isPressed, setIsPressed] = useState(false);
+
+  const handleCardMouseDown = () => {
+    setIsPressed(true);
+  };
+
+  const handleCardMouseUp = () => {
+    setIsPressed(false);
+  };
+
   return (
-    <div className="group/card relative mx-2 mb-8 cursor-pointer">
+    <div
+      className="relative mx-2 mb-8 cursor-pointer"
+      onMouseDown={handleCardMouseDown}
+      onMouseUp={handleCardMouseUp}
+    >
       <div className="w-full min-w-0 max-w-[700px]">
         <div className="relative flex flex-col">
           <div className="relative w-full">
@@ -71,12 +86,17 @@ const VideoCard = ({
               </div>
             </div>
             <div className="absolute -right-3 top-1">
-              <button className="ripple-effect h-10 w-10 rounded-full">
+              <button
+                className="ripple-effect h-10 w-10 rounded-full"
+                onMouseDown={(e) => {
+                  e.stopPropagation(); // 이벤트 버블링 사전 차단
+                }}
+              >
                 <div className="flex items-center justify-center">
                   <EllipsisVertical
                     strokeWidth={1}
                     fill="black"
-                    alt="videoCard Menu"
+                    aria-label="videoCard Menu"
                     className="h-6 w-6"
                   />
                 </div>
@@ -86,7 +106,11 @@ const VideoCard = ({
         </div>
       </div>
       <div className="pointer-events-none absolute -inset-1">
-        <div className="absolute inset-0 rounded-xl bg-black opacity-0 transition-opacity duration-300 ease-out group-active/card:opacity-10"></div>
+        <div
+          className={`videoCardOverlay ${
+            isPressed ? "opacity-10" : "opacity-0"
+          }`}
+        ></div>
       </div>
     </div>
   );

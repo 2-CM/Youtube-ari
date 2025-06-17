@@ -60,6 +60,11 @@ button {
   @apply grid w-full grid-cols-1 justify-start pt-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3;
 }
 
+/***** VideoCard *****/
+.videoCardOverlay {
+  @apply absolute inset-0 rounded-xl bg-black transition-opacity duration-300 ease-out;
+}
+
 @tailwind utilities;
 
 /***** Header *****/
