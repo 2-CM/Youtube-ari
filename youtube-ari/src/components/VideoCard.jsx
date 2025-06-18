@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { EllipsisVertical } from "lucide-react";
 
 const VideoCard = ({
+  videoId,
   title,
   thumbnail,
   channelImage,
@@ -9,7 +11,17 @@ const VideoCard = ({
   views,
   publishedAt,
 }) => {
+  const navigate = useNavigate();
   const [isPressed, setIsPressed] = useState(false);
+
+  const handleVideoClick = () => {
+    navigate(`/video/${videoId}`);
+  };
+
+  const handleChannelClick = (e) => {
+    e.stopPropagation(); // 카드 클릭 이벤트 차단
+    navigate(`/@${channelName}`);
+  };
 
   const handleCardMouseDown = () => {
     setIsPressed(true);
@@ -22,48 +34,47 @@ const VideoCard = ({
   return (
     <div
       className="relative mx-2 mb-8 cursor-pointer"
+      onClick={handleVideoClick}
       onMouseDown={handleCardMouseDown}
       onMouseUp={handleCardMouseUp}
     >
       <div className="w-full min-w-0 max-w-[700px]">
         <div className="relative flex flex-col">
           <div className="relative w-full">
-            <a
-              href="/"
-              className="block aspect-video overflow-hidden rounded-xl"
-            >
+            <div className="block aspect-video overflow-hidden rounded-xl">
               <img
                 src={thumbnail}
                 alt="Video Thumbnail"
                 className="h-full w-full object-cover"
               />
-            </a>
+            </div>
           </div>
           <div className="relative flex flex-row">
             <div className="mr-3 mt-3 h-9">
-              <a href="/" className="flex h-9 w-9 justify-center">
+              <div
+                onClick={handleChannelClick}
+                className="flex h-9 w-9 justify-center"
+              >
                 <img
                   src={channelImage}
                   alt="Channel Image"
                   className="rounded-full object-cover"
                 />
-              </a>
+              </div>
             </div>
             <div className="overflow-x-hidden pr-6">
               <h3 className="mb-1 mt-3">
-                <a href="/" className="block">
-                  <div
-                    title={title}
-                    className="line-clamp-2 max-h-11 text-ellipsis whitespace-normal"
-                  >
-                    {title}
-                  </div>
-                </a>
+                <div
+                  title={title}
+                  className="line-clamp-2 max-h-11 text-ellipsis whitespace-normal"
+                >
+                  {title}
+                </div>
               </h3>
               <div className="flex flex-col text-left text-sm text-ytGray-90">
                 <div className="flex flex-wrap items-center">
-                  <a
-                    href="/"
+                  <div
+                    onClick={handleChannelClick}
                     title={channelName}
                     className="group hover:text-black"
                   >
@@ -75,7 +86,7 @@ const VideoCard = ({
                     >
                       {channelName}
                     </div>
-                  </a>
+                  </div>
                 </div>
                 <div className="line-clamp-2 flex flex-row text-ellipsis">
                   <span>{views}</span>
@@ -85,7 +96,10 @@ const VideoCard = ({
                 </div>
               </div>
             </div>
-            <div className="absolute -right-3 top-1">
+            <div
+              className="absolute -right-3 top-1"
+              onClick={(e) => e.stopPropagation()} // 카드 클릭 이벤트 차단
+            >
               <button
                 className="ripple-effect h-10 w-10 rounded-full"
                 onMouseDown={(e) => {
