@@ -1,4 +1,5 @@
 import ThemeToggleSwitch from "../ThemeToggleSwitch";
+import channelImage from "../../assets/mock_channelImage_3.jpg";
 
 const HeaderUserMenu = () => {
   return (
@@ -6,11 +7,7 @@ const HeaderUserMenu = () => {
       <ThemeToggleSwitch />
       <button className="avatarBtn px-2">
         <div className="avatarImageWrapper">
-          <img
-            src=""
-            alt="Avatar Image"
-            className="block h-8 w-8 bg-slate-300"
-          />
+          <img src={channelImage} alt="Avatar Image" className="h-8 w-8" />
         </div>
       </button>
     </div>
