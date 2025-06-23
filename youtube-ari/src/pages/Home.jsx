@@ -5,7 +5,6 @@ import VideoGrid from "../components/VideoGrid";
 const Home = () => {
   return (
     <div>
-      <Header />
       <SideBar />
       <VideoGrid />
     </div>
