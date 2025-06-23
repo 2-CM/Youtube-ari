@@ -1,6 +1,5 @@
-import Header from "../components/Header/Header";
 import SideBar from "../components/SideBar";
-import VideoGrid from "../components/VideoGrid";
+import VideoGrid from "../components/VideoGrid/VideoGrid";
 
 const Home = () => {
   return (

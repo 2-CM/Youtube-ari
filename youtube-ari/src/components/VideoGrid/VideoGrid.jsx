@@ -1,5 +1,5 @@
 import VideoCard from "./VideoCard";
-import mockVideos from "../data/mockVideos";
+import mockVideos from "../../data/mockVideos";
 
 const VideoGrid = () => {
   return (
