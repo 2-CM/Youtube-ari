@@ -38,7 +38,11 @@ const VideoDetail = () => {
         <div className="mb-6 mt-3">
           <h1>{title}</h1>
           <ChannelInfo channelImage={channelImage} channelName={channelName} />
-          <Description />
+          <Description
+            views={views}
+            publishedAt={publishedAt}
+            description={description}
+          />
         </div>
       </div>
       <div className="pr-6 pt-6">
