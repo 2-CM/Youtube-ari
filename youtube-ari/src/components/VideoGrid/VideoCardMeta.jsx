@@ -11,16 +11,19 @@ const VideoCardMeta = ({
   return (
     <div className="relative flex flex-row">
       {/* 채널 이미지 */}
-      <div
-        onClick={handleChannelClick}
-        className="mr-3 mt-3 flex h-9 w-9 justify-center"
-      >
-        <img
-          src={channelImage}
-          alt="Channel Image"
-          className="rounded-full object-cover"
-        />
-      </div>
+      {/* 채널 이미지가 있는 경우에만 렌더링 */}
+      {channelImage && (
+        <div
+          onClick={handleChannelClick}
+          className="mr-3 mt-3 flex h-9 w-9 justify-center"
+        >
+          <img
+            src={channelImage}
+            alt="Channel Image"
+            className="rounded-full object-cover"
+          />
+        </div>
+      )}
 
       {/* 제목 및 채널 정보 */}
       <div className="overflow-x-hidden pr-6">

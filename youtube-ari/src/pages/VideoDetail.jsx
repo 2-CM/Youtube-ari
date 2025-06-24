@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import mockVideos from "../data/mockVideos";
 
@@ -11,6 +11,11 @@ const VideoDetail = () => {
   const { id } = useParams();
   const video = mockVideos.find((v) => v.videoId === Number(id));
 
+  const navigate = useNavigate();
+  const handleChannelClick = () => {
+    navigate(`/@${video.channelName}`);
+  };
+
   const {
     title,
     thumbnail,
@@ -21,10 +26,13 @@ const VideoDetail = () => {
     description,
   } = video;
 
+  // Related video 목록 (자기 자신 제외)
+  const relatedVideos = mockVideos.filter((v) => v.videoId !== Number(id));
+
   return (
-    <div className="mx-auto mt-14 flex flex-row">
-      <div className="ml-6 flex-1 pr-6 pt-6">
-        <div className="aspect-video overflow-hidden rounded-lg">
+    <div className="mx-auto ml-6 mt-14 flex flex-col lg:flex-row">
+      <div className="flex-1 pr-6 pt-6">
+        <div className="aspect-video min-h-[320px] min-w-[640px] overflow-hidden rounded-lg">
           <iframe
             className="h-full w-full"
             src="https://www.youtube.com/embed/C-hQpbS5gHI?si=aPtc1QWE5sgLTjda"
@@ -37,7 +45,11 @@ const VideoDetail = () => {
         </div>
         <div className="mb-6 mt-3">
           <h1>{title}</h1>
-          <ChannelInfo channelImage={channelImage} channelName={channelName} />
+          <ChannelInfo
+            channelImage={channelImage}
+            channelName={channelName}
+            handleChannelClick={handleChannelClick}
+          />
           <Description
             views={views}
             publishedAt={publishedAt}
@@ -45,8 +57,13 @@ const VideoDetail = () => {
           />
         </div>
       </div>
+
+      {/* 추천영상 */}
       <div className="pr-6 pt-6">
-        <RelatedVideos />
+        <RelatedVideos
+          videos={relatedVideos}
+          handleChannelClick={handleChannelClick}
+        />
       </div>
     </div>
   );

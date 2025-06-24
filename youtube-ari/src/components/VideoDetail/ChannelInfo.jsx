@@ -1,12 +1,4 @@
-import { useNavigate } from "react-router-dom";
-
-const ChannelInfo = ({ channelImage, channelName }) => {
-  const navigate = useNavigate();
-
-  const handleChannelClick = () => {
-    navigate(`/@${channelName}`);
-  };
-
+const ChannelInfo = ({ channelImage, channelName, handleChannelClick }) => {
   return (
     <div
       className="mt-3 flex cursor-pointer select-none flex-row items-center"

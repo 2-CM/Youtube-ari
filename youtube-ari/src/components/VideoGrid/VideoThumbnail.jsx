@@ -1,7 +1,7 @@
 const VideoThumbnail = ({ thumbnail }) => {
   return (
     <div className="relative w-full">
-      <div className="block aspect-video overflow-hidden rounded-xl">
+      <div className="block aspect-video overflow-hidden rounded-lg">
         <img
           src={thumbnail}
           alt="Video Thumbnail"
