@@ -7,7 +7,11 @@ const VideoCardMeta = ({
   views,
   publishedAt,
   handleChannelClick,
+  size = "base", // 기본값 'base'
 }) => {
+  const titleSize = size === "small" ? "text-sm" : "text-base"; // 14px or 16px
+  const metaSize = size === "small" ? "text-xs" : "text-sm"; // 12px or 14px
+
   return (
     <div className="relative flex flex-row">
       {/* 채널 이미지 */}
@@ -27,7 +31,7 @@ const VideoCardMeta = ({
 
       {/* 제목 및 채널 정보 */}
       <div className="overflow-x-hidden pr-6">
-        <h3 className="mb-1 mt-3">
+        <h3 className={`mb-1 mt-3 ${titleSize}`}>
           <div
             title={title}
             className="line-clamp-2 max-h-11 text-ellipsis whitespace-normal"
@@ -35,7 +39,7 @@ const VideoCardMeta = ({
             {title}
           </div>
         </h3>
-        <div className="flex flex-col text-left text-sm text-ytGray-90">
+        <div className={`flex flex-col text-left ${metaSize} text-ytGray-90`}>
           <div
             onClick={handleChannelClick}
             title={channelName}
@@ -45,12 +49,12 @@ const VideoCardMeta = ({
             <div
               role="tooltip"
               aria-label="tooltip"
-              className="tooltip -top-1 left-8 group-hover:opacity-90"
+              className="tooltip -top-1 group-hover:opacity-90"
             >
               {channelName}
             </div>
           </div>
-          <div className="line-clamp-2 flex flex-row text-ellipsis">
+          <div className="line-clamp-1 flex flex-row text-ellipsis">
             <span>{views}</span>
             <span className="before:mx-1 before:content-['•']">
               {publishedAt}

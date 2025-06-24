@@ -26,6 +26,7 @@ const RelatedVideoItem = ({ video, handleChannelClick }) => {
           views={views}
           publishedAt={publishedAt}
           handleChannelClick={handleChannelClick}
+          size="small"
         />
       </div>
     </div>
