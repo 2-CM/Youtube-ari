@@ -7,10 +7,10 @@ const VideoCardMeta = ({
   views,
   publishedAt,
   handleChannelClick,
-  size = "base", // 기본값 'base'
+  mode = "videoGrid",
 }) => {
-  const titleSize = size === "small" ? "text-sm" : "text-base"; // 14px or 16px
-  const metaSize = size === "small" ? "text-xs" : "text-sm"; // 12px or 14px
+  const titleSize = mode === "relatedVideos" ? "text-sm" : "text-base"; // 14px or 16px
+  const metaSize = mode === "relatedVideos" ? "text-xs" : "text-sm"; // 12px or 14px
 
   return (
     <div className="relative flex flex-row">
@@ -39,7 +39,11 @@ const VideoCardMeta = ({
             {title}
           </div>
         </h3>
-        <div className={`flex flex-col text-left ${metaSize} text-ytGray-90`}>
+        <div
+          className={`flex ${
+            mode === "relatedVideos" ? "flex-row lg:flex-col" : "flex-col"
+          } text-left ${metaSize} text-ytGray-90`}
+        >
           <div
             onClick={handleChannelClick}
             title={channelName}
@@ -55,10 +59,11 @@ const VideoCardMeta = ({
             </div>
           </div>
           <div className="line-clamp-1 text-ellipsis whitespace-nowrap">
+            {mode === "relatedVideos" && (
+              <span className="mx-1 inline lg:hidden">•</span>
+            )}
             <span>{views}</span>
-            <span className="before:mx-1 before:content-['•']">
-              {publishedAt}
-            </span>
+            <span className="dot-separator">{publishedAt}</span>
           </div>
         </div>
       </div>

@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import VideoThumbnail from "../VideoGrid/VideoThumbnail";
 import VideoCardMeta from "../VideoGrid/VideoCardMeta";
 
-const RelatedVideoItem = ({ video }) => {
+const RelatedVideoItem = ({ video, variant = "sidebar" }) => {
   const navigate = useNavigate();
 
   const handleVideoClick = () => {
@@ -15,23 +15,28 @@ const RelatedVideoItem = ({ video }) => {
   };
 
   const { title, thumbnail, channelName, views, publishedAt } = video;
+  const isGrid = variant === "grid";
 
   return (
     <div
       onClick={handleVideoClick}
-      className="relative flex max-h-[94px] max-w-[402px] flex-row"
+      className={`relative cursor-pointer overflow-hidden ${
+        isGrid
+          ? "flex max-w-full flex-col"
+          : "flex max-h-[94px] max-w-[402px] flex-row"
+      }`}
     >
-      <div className="mr-2 h-24 w-40">
+      <div className={isGrid ? "w-full" : "mr-2 h-24 w-40"}>
         <VideoThumbnail thumbnail={thumbnail} />
       </div>
-      <div className="flex-1 overflow-hidden">
+      <div className={isGrid ? "" : "flex-1 overflow-hidden"}>
         <VideoCardMeta
           title={title}
           channelName={channelName}
           views={views}
           publishedAt={publishedAt}
           handleChannelClick={handleChannelClick}
-          size="small"
+          mode="relatedVideos"
         />
       </div>
     </div>

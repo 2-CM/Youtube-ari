@@ -64,11 +64,12 @@ h3 {
 }
 
 /***** VideoGrid *****/
+/** VideoGrid **/
 .videoGridCols {
   @apply grid w-full grid-cols-1 justify-start pt-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3;
 }
 
-/***** VideoCard *****/
+/** VideoCard **/
 .videoCardOverlay {
   @apply absolute inset-0 rounded-xl bg-black transition-opacity duration-300 ease-out;
 }
@@ -81,7 +82,8 @@ h3 {
   @apply opacity-0 transition-opacity duration-300 ease-in-out;
 }
 
-/***** VideoCard *****/
+/***** VideoGrid *****/
+/** VideoCard **/
 .ripple-effect {
   position: relative;
   overflow: hidden;
@@ -100,4 +102,8 @@ h3 {
 .ripple-effect:active::after {
   opacity: 1;
   transition: none;
+}
+
+.dot-separator {
+  @apply before:mx-1 before:content-["•"];
 }
