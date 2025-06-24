@@ -44,19 +44,21 @@ const VideoCardMeta = ({
             mode === "relatedVideos" ? "flex-row lg:flex-col" : "flex-col"
           } text-left ${metaSize} text-ytGray-90`}
         >
-          <div
-            onClick={handleChannelClick}
-            title={channelName}
-            className="group hover:text-black"
-          >
-            {channelName}
-            <div
-              role="tooltip"
-              aria-label="tooltip"
-              className="tooltip -top-1 group-hover:opacity-90"
+          <div>
+            <span
+              title={channelName}
+              onClick={handleChannelClick}
+              className="group cursor-pointer hover:text-black"
             >
               {channelName}
-            </div>
+              <div
+                role="tooltip"
+                aria-label="tooltip"
+                className="tooltip -top-1 group-hover:opacity-90"
+              >
+                {channelName}
+              </div>
+            </span>
           </div>
           <div className="line-clamp-1 text-ellipsis whitespace-nowrap">
             {mode === "relatedVideos" && (
