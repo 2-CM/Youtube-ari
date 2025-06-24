@@ -2,18 +2,23 @@ import { useNavigate } from "react-router-dom";
 import VideoThumbnail from "../VideoGrid/VideoThumbnail";
 import VideoCardMeta from "../VideoGrid/VideoCardMeta";
 
-const RelatedVideoItem = ({ video, handleChannelClick }) => {
+const RelatedVideoItem = ({ video }) => {
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const handleVideoClick = () => {
     navigate(`/video/${video.videoId}`);
+  };
+
+  const handleChannelClick = (e) => {
+    e.stopPropagation();
+    navigate(`/@${video.channelName}`);
   };
 
   const { title, thumbnail, channelName, views, publishedAt } = video;
 
   return (
     <div
-      onClick={handleClick}
+      onClick={handleVideoClick}
       className="relative flex max-h-[94px] max-w-[402px] flex-row"
     >
       <div className="mr-2 h-24 w-40">

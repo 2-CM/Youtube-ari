@@ -60,10 +60,7 @@ const VideoDetail = () => {
 
       {/* 추천영상 */}
       <div className="pr-6 pt-6">
-        <RelatedVideos
-          videos={relatedVideos}
-          handleChannelClick={handleChannelClick}
-        />
+        <RelatedVideos videos={relatedVideos} />
       </div>
     </div>
   );

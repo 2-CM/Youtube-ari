@@ -1,6 +1,6 @@
 const VideoThumbnail = ({ thumbnail }) => {
   return (
-    <div className="relative w-full">
+    <div className="relative w-full cursor-pointer">
       <div className="block aspect-video overflow-hidden rounded-lg">
         <img
           src={thumbnail}

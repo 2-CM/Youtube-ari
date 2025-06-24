@@ -19,18 +19,18 @@ const VideoCardMeta = ({
       {channelImage && (
         <div
           onClick={handleChannelClick}
-          className="mr-3 mt-3 flex h-9 w-9 justify-center"
+          className="mr-3 mt-3 flex h-9 w-9 shrink-0 justify-center"
         >
           <img
             src={channelImage}
             alt="Channel Image"
-            className="rounded-full object-cover"
+            className="h-9 w-9 rounded-full object-cover"
           />
         </div>
       )}
 
       {/* 제목 및 채널 정보 */}
-      <div className="overflow-x-hidden pr-6">
+      <div className="cursor-pointer overflow-x-hidden pr-6">
         <h3 className={`mb-1 mt-3 ${titleSize}`}>
           <div
             title={title}
@@ -54,7 +54,7 @@ const VideoCardMeta = ({
               {channelName}
             </div>
           </div>
-          <div className="line-clamp-1 flex flex-row text-ellipsis">
+          <div className="line-clamp-1 text-ellipsis whitespace-nowrap">
             <span>{views}</span>
             <span className="before:mx-1 before:content-['•']">
               {publishedAt}
