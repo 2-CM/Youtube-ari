@@ -20,7 +20,7 @@ const Description = ({ views, publishedAt, description }) => {
         setMaxHeight("none");
       }
 
-      // "더보기" 버튼을 보여줄지 여부
+      // "...more" 버튼을 보여줄지 여부
       setShouldShowToggle(el.scrollHeight > collapsedHeight + 1);
     }
   }, [isExpanded, description]);
@@ -42,22 +42,35 @@ const Description = ({ views, publishedAt, description }) => {
           </div>
         )}
 
-        {/* 본문 설명 */}
         <div
-          ref={textRef}
-          className="overflow-hidden whitespace-pre-line transition-all duration-300"
+          className={`${
+            !isExpanded ? "flex items-start" : ""
+          } overflow-hidden whitespace-pre-line transition-all duration-300`}
           style={{ maxHeight }}
         >
-          {description}
+          {/* 본문 설명 */}
+          <div ref={textRef} className="overflow-hidden">
+            {description}
+          </div>
+
+          {/* ...more 버튼 (펼치기 전) */}
+          {shouldShowToggle && !isExpanded && (
+            <button
+              onClick={() => setIsExpanded(true)}
+              className="ml-2 self-end rounded font-medium transition-colors active:bg-black/20"
+            >
+              ...more
+            </button>
+          )}
         </div>
 
-        {/* 더보기/간략히 버튼 */}
-        {shouldShowToggle && (
+        {/* Show less 버튼 (펼친 후) */}
+        {shouldShowToggle && isExpanded && (
           <button
-            onClick={() => setIsExpanded((prev) => !prev)}
+            onClick={() => setIsExpanded(false)}
             className="mt-2 rounded font-medium transition-colors active:bg-black/20"
           >
-            {isExpanded ? "Show less" : "...more"}
+            Show less
           </button>
         )}
       </div>
