@@ -1,5 +1,4 @@
 import { EllipsisVertical } from "lucide-react";
-import RelatedVideos from "../VideoDetail/RelatedVideos";
 
 const VideoCardMeta = ({
   channelImage,
