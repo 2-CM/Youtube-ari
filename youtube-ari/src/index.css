@@ -32,9 +32,17 @@ h3 {
   @apply ml-0 border-r border-[#1c62b9] py-[2px] pl-12 pr-1 shadow-[inset_0_1px_2px_rgba(0,0,0,0.3)];
 }
 
+.channelNameText {
+  @apply cursor-pointer hover:text-black;
+}
+
 .tooltip {
   @apply pointer-events-none absolute z-[1002] m-2 whitespace-nowrap rounded-sm bg-ytGray-90 p-2 text-xs text-white;
   @apply tooltipAnimation;
+}
+
+.channelNameText:hover .tooltip {
+  @apply opacity-90;
 }
 
 /** HeaderUserMenu **/

@@ -48,13 +48,13 @@ const VideoCardMeta = ({
             <span
               title={channelName}
               onClick={handleChannelClick}
-              className="group cursor-pointer hover:text-black"
+              className="channelNameText"
             >
               {channelName}
               <div
                 role="tooltip"
                 aria-label="tooltip"
-                className="tooltip -top-1 group-hover:opacity-90"
+                className="tooltip -top-1"
               >
                 {channelName}
               </div>

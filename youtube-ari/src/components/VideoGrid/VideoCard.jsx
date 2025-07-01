@@ -14,7 +14,6 @@ const VideoCard = ({
   publishedAt,
 }) => {
   const navigate = useNavigate();
-  const [isPressed, setIsPressed] = useState(false);
 
   const handleVideoClick = () => {
     navigate(`/video/${videoId}`);
@@ -25,20 +24,10 @@ const VideoCard = ({
     navigate(`/@${channelName}`);
   };
 
-  const handleCardMouseDown = () => {
-    setIsPressed(true);
-  };
-
-  const handleCardMouseUp = () => {
-    setIsPressed(false);
-  };
-
   return (
     <div
-      className="relative mx-2 mb-8 cursor-pointer"
+      className="group relative mx-2 mb-8 cursor-pointer"
       onClick={handleVideoClick}
-      onMouseDown={handleCardMouseDown}
-      onMouseUp={handleCardMouseUp}
     >
       <div className="w-full min-w-0 max-w-[700px]">
         <div className="relative flex flex-col">
@@ -53,12 +42,9 @@ const VideoCard = ({
           />
         </div>
       </div>
+
       <div className="pointer-events-none absolute -inset-1">
-        <div
-          className={`videoCardOverlay ${
-            isPressed ? "opacity-10" : "opacity-0"
-          }`}
-        ></div>
+        <div className="videoCardOverlay opacity-0 group-hover:opacity-10"></div>
       </div>
     </div>
   );

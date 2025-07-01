@@ -20,7 +20,7 @@ const RelatedVideoItem = ({ video, variant = "sidebar" }) => {
   return (
     <div
       onClick={handleVideoClick}
-      className={`relative cursor-pointer overflow-hidden ${
+      className={`group relative cursor-pointer rounded-xl ${
         isGrid
           ? "flex max-w-full flex-col"
           : "flex max-h-[94px] max-w-[402px] flex-row"
@@ -38,6 +38,10 @@ const RelatedVideoItem = ({ video, variant = "sidebar" }) => {
           handleChannelClick={handleChannelClick}
           mode="relatedVideos"
         />
+      </div>
+
+      <div className="pointer-events-none absolute -inset-1">
+        <div className="videoCardOverlay opacity-0 group-hover:opacity-10"></div>
       </div>
     </div>
   );
