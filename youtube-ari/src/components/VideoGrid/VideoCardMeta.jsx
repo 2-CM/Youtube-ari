@@ -1,4 +1,5 @@
 import { EllipsisVertical } from "lucide-react";
+import RelatedVideos from "../VideoDetail/RelatedVideos";
 
 const VideoCardMeta = ({
   channelImage,
@@ -9,9 +10,6 @@ const VideoCardMeta = ({
   handleChannelClick,
   mode = "videoGrid",
 }) => {
-  const titleSize = mode === "relatedVideos" ? "text-sm" : "text-base"; // 14px or 16px
-  const metaSize = mode === "relatedVideos" ? "text-xs" : "text-sm"; // 12px or 14px
-
   return (
     <div className="relative flex flex-row">
       {/* 채널 이미지 */}
@@ -31,7 +29,9 @@ const VideoCardMeta = ({
 
       {/* 제목 및 채널 정보 */}
       <div className="cursor-pointer overflow-x-hidden pr-6">
-        <h3 className={`mb-1 mt-3 ${titleSize}`}>
+        <h3
+          className={`mb-1 ${mode === "relatedVideos" ? "text-sm" : "mt-3 text-base"}`}
+        >
           <div
             title={title}
             className="line-clamp-2 max-h-11 text-ellipsis whitespace-normal"
@@ -41,8 +41,10 @@ const VideoCardMeta = ({
         </h3>
         <div
           className={`flex ${
-            mode === "relatedVideos" ? "flex-row lg:flex-col" : "flex-col"
-          } text-left ${metaSize} text-ytGray-90`}
+            mode === "relatedVideos"
+              ? "flex-row text-xs lg:flex-col"
+              : "flex-col text-sm"
+          } text-left text-ytGray-90`}
         >
           <div>
             <span
@@ -71,15 +73,16 @@ const VideoCardMeta = ({
       </div>
 
       {/* 우측 메뉴 버튼 */}
-      <div
-        className="absolute -right-3 top-1"
-        onClick={(e) => {
-          e.stopPropagation(); // 카드 클릭 이벤트 차단
-        }}
-      >
+      <div>
         <button
-          className="ripple-effect h-10 w-10 rounded-full"
-          onMouseDown={(e) => e.stopPropagation()} // 이벤트 버블링 사전 차단
+          className={`ripple-effect absolute rounded-full ${
+            mode === "relatedVideos"
+              ? "right-0 h-6 w-6"
+              : "-right-3 top-1 h-10 w-10"
+          }`}
+          onClick={(e) => {
+            e.stopPropagation(); // 카드 클릭 이벤트 차단
+          }}
         >
           <div className="flex items-center justify-center">
             <EllipsisVertical
