@@ -23,7 +23,7 @@ const MyPage = () => {
               />
             </div>
           </div>
-          <div className="flex cursor-pointer flex-col">
+          <div className="flex cursor-pointer flex-col justify-between">
             <div className="text-4xl font-bold">최아로인</div>
             <div className="text-sm text-ytGray-90">Create a channel</div>
             <button className="logoutBtn">
@@ -35,7 +35,7 @@ const MyPage = () => {
 
         {/* history 영역 */}
         <div className="mb-12 w-full pt-6">
-          <div className="mb-6 flex w-full justify-between">
+          <div className="mb-4 flex w-full justify-between">
             <h1 className="ml-2">History</h1>
             <div className="flex items-center gap-2">
               <button className="myPageBtn-common px-4 text-sm font-medium">
@@ -49,7 +49,7 @@ const MyPage = () => {
               </button>
             </div>
           </div>
-          <div className="flex w-full gap-x-4 overflow-x-auto">
+          <div className="flex w-full gap-x-4 overflow-x-auto pt-1">
             {historyVideos.map((video) => (
               <div key={video.videoId} className="w-64 flex-shrink-0">
                 <VideoCard
