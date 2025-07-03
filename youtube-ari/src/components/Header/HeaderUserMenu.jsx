@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const HeaderUserMenu = () => {
   const navigate = useNavigate();
   const handleProfileClick = () => {
-    navigate(`/mypage`);
+    navigate(`/you`);
   };
 
   return (
