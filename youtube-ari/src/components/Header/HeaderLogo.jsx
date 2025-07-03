@@ -3,9 +3,9 @@ import logo from "../../assets/youtube-logo.svg";
 
 const HeaderLogo = () => {
   return (
-    <div className="flex items-center">
+    <div className="flex flex-shrink-0 items-center">
       <Link to="/" title="Youtube Home" className="px-4 py-[18px]">
-        <img src={logo} alt="YouTube Logo" className="h-full w-full" />
+        <img src={logo} alt="YouTube Logo" />
       </Link>
     </div>
   );

@@ -12,6 +12,14 @@ button {
   @apply m-0 cursor-pointer p-0;
 }
 
+h1 {
+  @apply text-xl font-bold leading-snug text-black;
+}
+
+h3 {
+  @apply text-base font-medium leading-snug text-black;
+}
+
 @tailwind components;
 
 /***** Header *****/
@@ -24,9 +32,17 @@ button {
   @apply ml-0 border-r border-[#1c62b9] py-[2px] pl-12 pr-1 shadow-[inset_0_1px_2px_rgba(0,0,0,0.3)];
 }
 
+.channelNameText {
+  @apply cursor-pointer hover:text-black;
+}
+
 .tooltip {
   @apply pointer-events-none absolute z-[1002] m-2 whitespace-nowrap rounded-sm bg-ytGray-90 p-2 text-xs text-white;
   @apply tooltipAnimation;
+}
+
+.channelNameText:hover .tooltip {
+  @apply opacity-90;
 }
 
 /** HeaderUserMenu **/
@@ -56,11 +72,12 @@ button {
 }
 
 /***** VideoGrid *****/
+/** VideoGrid **/
 .videoGridCols {
   @apply grid w-full grid-cols-1 justify-start pt-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3;
 }
 
-/***** VideoCard *****/
+/** VideoCard **/
 .videoCardOverlay {
   @apply absolute inset-0 rounded-xl bg-black transition-opacity duration-300 ease-out;
 }
@@ -73,16 +90,19 @@ button {
   @apply opacity-0 transition-opacity duration-300 ease-in-out;
 }
 
-/***** VideoCard *****/
+/***** VideoGrid *****/
+/** VideoCard **/
 .ripple-effect {
-  position: relative;
-  overflow: hidden;
 }
 
 .ripple-effect::after {
   content: "";
   position: absolute;
-  inset: 0;
+  right: 0;
+  top: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translateY(-50%);
   background: rgba(0, 0, 0, 0.1);
   border-radius: inherit;
   opacity: 0;
@@ -92,4 +112,8 @@ button {
 .ripple-effect:active::after {
   opacity: 1;
   transition: none;
+}
+
+.dot-separator {
+  @apply before:mx-1 before:content-["•"];
 }
