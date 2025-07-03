@@ -12,7 +12,7 @@ const HeaderUserMenu = () => {
     <div className="flex items-center justify-center">
       <ThemeToggleSwitch />
       <button className="avatarBtn px-2" onClick={handleProfileClick}>
-        <div className="avatarImageWrapper">
+        <div className="avatarImageWrapper flex-shrink-0">
           <img src={channelImage} alt="Avatar Image" className="h-8 w-8" />
         </div>
       </button>
