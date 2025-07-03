@@ -37,6 +37,7 @@ const RelatedVideoItem = ({ video, variant = "sidebar" }) => {
           publishedAt={publishedAt}
           handleChannelClick={handleChannelClick}
           mode="relatedVideos"
+          variant={variant}
         />
       </div>
 
