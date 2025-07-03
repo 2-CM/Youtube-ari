@@ -12,6 +12,8 @@ const VideoCard = ({
   channelName,
   views,
   publishedAt,
+  mode,
+  variant,
 }) => {
   const navigate = useNavigate();
 
@@ -39,6 +41,8 @@ const VideoCard = ({
             views={views}
             publishedAt={publishedAt}
             handleChannelClick={handleChannelClick}
+            mode={mode}
+            variant={variant}
           />
         </div>
       </div>

@@ -51,7 +51,7 @@ h3 {
 }
 
 .avatarImageWrapper {
-  @apply mx-2 h-8 w-8 overflow-hidden rounded-full;
+  @apply mx-2 overflow-hidden rounded-full object-fill;
 }
 
 .avatarBtn:focus .avatarImageWrapper {
@@ -80,6 +80,15 @@ h3 {
 /** VideoCard **/
 .videoCardOverlay {
   @apply absolute inset-0 rounded-xl bg-black transition-opacity duration-300 ease-out;
+}
+
+/***** MyPage *****/
+.logoutBtn {
+  @apply my-3 flex h-8 items-center justify-center rounded-full bg-ytGray-30 hover:bg-ytGray-50 active:bg-ytGray-70;
+}
+
+.myPageBtn-common {
+  @apply flex h-9 items-center justify-center rounded-full border border-ytGray-40 hover:bg-ytGray-40 active:bg-ytGray-70;
 }
 
 @tailwind utilities;
