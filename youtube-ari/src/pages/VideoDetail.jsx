@@ -20,38 +20,49 @@ const VideoDetail = () => {
   } = useVideoDetail(initialVideoData ? null : id); // 초기 데이터 있으면 null 전달
 
   // 현재 동영상 데이터, 로딩, 에러 상태 관리
-  const [currentVideo, setCurrentVideo] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [currentVideo, setCurrentVideo] = useState(initialVideoData || null);
+  const [loading, setLoading] = useState(!initialVideoData);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (initialVideoData) {
-      // 1. VideoCard에서 state로 데이터가 넘어왔다면, 바로 사용
-      setCurrentVideo(initialVideoData);
-      setLoading(false);
-      setError(null);
-    } else if (id) {
-      // 2. URL 파라미터(id)는 있지만 initialVideoData가 없는 경우 (API 호출 필요)
-      if (apiLoading) {
-        setLoading(true);
-        setError(null);
-      } else if (apiError) {
+    // initialVideoData가 없는 경우에만 API 호출 결과 처리
+    if (!initialVideoData) {
+      if (id) {
+        // id가 있을 때만 API 관련 로직 실행
+        if (apiLoading) {
+          console.log("VideoDetail: API is loading for ID:", id);
+          setLoading(true);
+          setError(null);
+        } else if (apiError) {
+          console.log("VideoDetail: API error detected for ID:", id, apiError);
+          setLoading(false);
+          setError(apiError);
+          setCurrentVideo(null); // 에러 시 데이터 초기화
+        } else if (apiFetchedVideoDetail) {
+          console.log(
+            "VideoDetail: API fetched detail received for ID:",
+            id,
+            apiFetchedVideoDetail,
+          );
+          setLoading(false);
+          setError(null);
+          setCurrentVideo(apiFetchedVideoDetail); // API 결과로 데이터 설정
+        }
+      } else {
+        // id 자체가 없는 경우 (잘못된 URL)
+        console.log("VideoDetail: Video ID is missing.");
         setLoading(false);
-        setError(apiError);
-        setCurrentVideo(null); // 에러 발생 시 데이터 초기화
-      } else if (apiFetchedVideoDetail) {
-        // API 호출이 성공적으로 완료되면 해당 데이터 사용
-        setCurrentVideo(apiFetchedVideoDetail);
-        setLoading(false);
-        setError(null);
+        setError(new Error("Video ID is missing."));
+        setCurrentVideo(null);
       }
-    } else {
-      // videoId 자체가 없는 경우 (예: 잘못된 URL)
-      setLoading(false);
-      setError(new Error("Video ID is missing."));
-      setCurrentVideo(null);
     }
-  }, [id, initialVideoData, apiLoading, apiError, apiFetchedVideoDetail]); // 의존성 배열
+  }, [
+    id,
+    initialVideoData, // 이젠 initialVideoData가 변하면 API 로직을 다시 체크
+    apiLoading,
+    apiError,
+    apiFetchedVideoDetail,
+  ]);
 
   // 로딩 UI
   if (loading) {

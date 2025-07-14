@@ -14,6 +14,7 @@ const VideoCard = ({
   publishedAt,
   mode,
   variant,
+  description,
 }) => {
   const { handleVideoClick } = useVideoNavigation();
 
@@ -27,6 +28,7 @@ const VideoCard = ({
       channelName,
       views,
       publishedAt,
+      description,
     });
   };
 
@@ -49,6 +51,7 @@ const VideoCard = ({
             channelName={channelName}
             views={views}
             publishedAt={publishedAt}
+            description={description}
             handleChannelClick={handleChannelClick}
             mode={mode}
             variant={variant}

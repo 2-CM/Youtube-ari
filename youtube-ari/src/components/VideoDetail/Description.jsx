@@ -52,17 +52,17 @@ const Description = ({ views, publishedAt, description }) => {
           <div ref={textRef} className="overflow-hidden">
             {description}
           </div>
-
-          {/* ...more 버튼 (펼치기 전) */}
-          {shouldShowToggle && !isExpanded && (
-            <button
-              onClick={() => setIsExpanded(true)}
-              className="ml-2 self-end rounded font-medium transition-colors active:bg-black/20"
-            >
-              ...more
-            </button>
-          )}
         </div>
+
+        {/* ...more 버튼 (펼치기 전) */}
+        {shouldShowToggle && !isExpanded && (
+          <button
+            onClick={() => setIsExpanded(true)}
+            className="mt-2 rounded font-medium transition-colors active:bg-black/20"
+          >
+            ...more
+          </button>
+        )}
 
         {/* Show less 버튼 (펼친 후) */}
         {shouldShowToggle && isExpanded && (
