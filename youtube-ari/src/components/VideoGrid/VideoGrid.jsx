@@ -1,31 +1,26 @@
-import { useEffect, useState } from "react";
-import { getPopularVideos } from "../../api/youtube";
 import VideoCard from "./VideoCard";
+import { usePopularVideos } from "../../hooks/usePopularVideos";
 
 const VideoGrid = () => {
-  const [videos, setVideos] = useState([]);
+  const { videos, loading, error } = usePopularVideos();
 
-  useEffect(() => {
-    const fetchVideos = async () => {
-      try {
-        const data = await getPopularVideos(); // API 호출
-        const transformed = data.map((item) => ({
-          videoId: item.id,
-          title: item.snippet.title,
-          thumbnail: item.snippet.thumbnails.medium.url,
-          channelName: item.snippet.channelTitle,
-          views: item.statistics.viewCount,
-          publishedAt: new Date(item.snippet.publishedAt).toLocaleDateString(),
-          channelImage: "", // 이후 채널 이미지 추가
-        }));
-        setVideos(transformed);
-      } catch (error) {
-        console.error("Failed to fetch videos", error);
-      }
-    };
+  // 로딩 상태 UI
+  if (loading) {
+    return (
+      <div className="ml-[72px] mt-14 text-center text-lg text-gray-600">
+        동영상을 불러오는 중입니다...
+      </div>
+    );
+  }
 
-    fetchVideos();
-  }, []);
+  // 에러 상태 UI
+  if (error) {
+    return (
+      <div className="ml-[72px] mt-14 text-center text-lg text-red-500">
+        데이터를 불러오는 데 실패했습니다: {error.message}
+      </div>
+    );
+  }
 
   return (
     <div className="ml-[72px] mt-14">
@@ -38,7 +33,7 @@ const VideoGrid = () => {
               title={video.title}
               thumbnail={video.thumbnail}
               channelImage={video.channelImage}
-              channelName={video.channelName}
+              channelName={video.channelname}
               views={video.views}
               publishedAt={video.publishedAt}
               mode="videoGrid"
