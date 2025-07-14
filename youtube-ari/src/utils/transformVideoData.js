@@ -41,6 +41,7 @@ export function formatTimeAgo(dateString) {
 export function transformVideo(video, channelImageUrl) {
   return {
     videoId: video.id,
+    channelId: video.snippet.channelId,
     channelname: video.snippet.channelTitle,
     title: video.snippet.title,
     views: formatViewCount(video.statistics?.viewCount || 0),

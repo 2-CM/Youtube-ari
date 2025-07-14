@@ -30,6 +30,7 @@ const VideoGrid = () => {
             <VideoCard
               key={video.videoId}
               videoId={video.videoId}
+              channelId={video.channelId}
               title={video.title}
               thumbnail={video.thumbnail}
               channelImage={video.channelImage}
