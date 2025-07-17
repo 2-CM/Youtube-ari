@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { useVideoDetail } from "../hooks/useVideoDetail";
-import mockVideos from "../data/mockVideos";
+import { usePopularVideos } from "../hooks/usePopularVideos";
 
 import ChannelInfo from "../components/VideoDetail/ChannelInfo";
 import Description from "../components/VideoDetail/Description";
@@ -18,6 +18,8 @@ const VideoDetail = () => {
     loading: apiLoading,
     error: apiError,
   } = useVideoDetail(initialVideoData ? null : id); // 초기 데이터 있으면 null 전달
+
+  const { videos: popularVideos, error: popularError } = usePopularVideos();
 
   // 현재 동영상 데이터, 로딩, 에러 상태 관리
   const [currentVideo, setCurrentVideo] = useState(initialVideoData || null);
@@ -56,13 +58,14 @@ const VideoDetail = () => {
         setCurrentVideo(null);
       }
     }
-  }, [
-    id,
-    initialVideoData, // 이젠 initialVideoData가 변하면 API 로직을 다시 체크
-    apiLoading,
-    apiError,
-    apiFetchedVideoDetail,
-  ]);
+  }, [id, initialVideoData, apiLoading, apiError, apiFetchedVideoDetail]);
+
+  // Related video 목록 (자기 자신 제외)
+  const randomVideos = popularVideos
+    ? popularVideos
+        .filter((v) => v.videoId !== id)
+        .sort(() => Math.random() - 0.5)
+    : [];
 
   // 로딩 UI
   if (loading) {
@@ -105,9 +108,6 @@ const VideoDetail = () => {
     channelId,
   } = currentVideo;
 
-  // Related video 목록 (자기 자신 제외)
-  const relatedVideos = mockVideos.filter((v) => v.videoId !== Number(id));
-
   return (
     <div className="mx-auto ml-6 mt-14 flex flex-col lg:flex-row">
       <div className="flex-1 pr-6 pt-6">
@@ -139,7 +139,7 @@ const VideoDetail = () => {
 
       {/* 추천영상 */}
       <div className="pr-6 pt-6">
-        <RelatedVideos videos={relatedVideos} />
+        <RelatedVideos videos={randomVideos} error={popularError} />
       </div>
     </div>
   );
