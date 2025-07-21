@@ -119,7 +119,7 @@ const VideoDetail = () => {
           ></iframe>
         </div>
         <div className="mb-6 mt-3">
-          <h1>{title}</h1>
+          <h1 className="dark:text-white">{title}</h1>
           <ChannelInfo
             channelImage={channelImage}
             channelName={channelName}
