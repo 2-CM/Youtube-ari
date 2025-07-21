@@ -93,7 +93,7 @@ const VideoCardMeta = ({
           }}
         >
           <EllipsisVertical
-            strokeWidth={1}
+            strokeWidth={2}
             fill="black"
             aria-label="videoCard Menu"
             className="h-6 w-6"
