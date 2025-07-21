@@ -54,6 +54,10 @@ h3 {
   @apply ml-0 border-r border-[#1c62b9] py-[2px] pl-12 pr-1 shadow-[inset_0_1px_2px_rgba(0,0,0,0.3)];
 }
 
+.searchBtn {
+  @apply w-16 rounded-r-[40px] border border-ytGray-60 bg-ytGray-10 hover:border-ytGray-70 hover:bg-ytGray-20 dark:hover:border-ytGray-60 dark:hover:bg-ytGray-10;
+}
+
 .channelNameText {
   @apply cursor-pointer hover:text-black;
 }

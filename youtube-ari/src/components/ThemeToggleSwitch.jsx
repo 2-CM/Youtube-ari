@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Sun, Moon } from "lucide-react";
 
 export default function ThemeToggleSwitch() {
-  // 1. 초기 테마 상태를 로컬 스토리지에서 불러오거나, 없으면 'light'로 설정
+  // 초기 테마 상태를 로컬 스토리지에서 불러오거나, 없으면 'light'로 설정
   const [theme, setTheme] = useState(() => {
     const savedTheme = localStorage.getItem("theme");
     return savedTheme ? savedTheme : "light";
