@@ -40,7 +40,7 @@ const VideoCardMeta = ({
         >
           <div
             title={title}
-            className="line-clamp-2 max-h-11 text-ellipsis whitespace-normal"
+            className="line-clamp-2 max-h-11 text-ellipsis whitespace-normal dark:text-white"
           >
             {title}
           </div>
@@ -50,7 +50,7 @@ const VideoCardMeta = ({
             mode === "relatedVideos"
               ? "flex-row text-xs lg:flex-col"
               : "flex-col text-sm"
-          } text-left text-ytGray-90`}
+          } text-left text-ytGray-90 dark:text-ytGray-20`}
         >
           <div>
             <span

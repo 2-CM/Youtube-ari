@@ -59,11 +59,11 @@ h3 {
 }
 
 .channelNameText {
-  @apply cursor-pointer hover:text-black;
+  @apply cursor-pointer hover:text-black dark:hover:text-white;
 }
 
 .tooltip {
-  @apply pointer-events-none absolute z-[1002] m-2 whitespace-nowrap rounded-sm bg-ytGray-90 p-2 text-xs text-white;
+  @apply pointer-events-none absolute z-[1002] m-2 whitespace-nowrap rounded-sm bg-ytGray-90 p-2 text-xs text-white dark:bg-ytGray-50;
   @apply tooltipAnimation;
 }
 
