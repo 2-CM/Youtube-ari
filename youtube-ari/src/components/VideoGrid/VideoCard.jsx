@@ -1,11 +1,11 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useVideoNavigation } from "../../hooks/useVideoNavigation";
 
 import VideoThumbnail from "./VideoThumbnail";
 import VideoCardMeta from "./VideoCardMeta";
 
 const VideoCard = ({
   videoId,
+  channelId,
   title,
   thumbnail,
   channelImage,
@@ -14,22 +14,33 @@ const VideoCard = ({
   publishedAt,
   mode,
   variant,
+  description,
 }) => {
-  const navigate = useNavigate();
+  const { handleVideoClick } = useVideoNavigation();
 
-  const handleVideoClick = () => {
-    navigate(`/video/${videoId}`);
+  const onCardClick = () => {
+    handleVideoClick({
+      videoId,
+      channelId,
+      title,
+      thumbnail,
+      channelImage,
+      channelName,
+      views,
+      publishedAt,
+      description,
+    });
   };
 
   const handleChannelClick = (e) => {
     e.stopPropagation(); // 카드 클릭 이벤트 차단
-    navigate(`/@${channelName}`);
+    //navigate(`/@${channelName}`);
   };
 
   return (
     <div
       className="group relative mx-2 mb-8 cursor-pointer"
-      onClick={handleVideoClick}
+      onClick={onCardClick}
     >
       <div className="w-full min-w-0 max-w-[700px]">
         <div className="relative flex flex-col">
@@ -40,6 +51,7 @@ const VideoCard = ({
             channelName={channelName}
             views={views}
             publishedAt={publishedAt}
+            description={description}
             handleChannelClick={handleChannelClick}
             mode={mode}
             variant={variant}
