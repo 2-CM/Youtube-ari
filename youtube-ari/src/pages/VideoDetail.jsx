@@ -26,36 +26,33 @@ const VideoDetail = () => {
   const [loading, setLoading] = useState(!initialVideoData);
   const [error, setError] = useState(null);
 
+  // useEffect: id 또는 initialVideoData, API 응답에 따라 currentVideo 및 로딩/에러 상태 관리
   useEffect(() => {
-    // initialVideoData가 없는 경우에만 API 호출 결과 처리
-    if (!initialVideoData) {
-      if (id) {
-        // id가 있을 때만 API 관련 로직 실행
-        if (apiLoading) {
-          console.log("VideoDetail: API is loading for ID:", id);
-          setLoading(true);
-          setError(null);
-        } else if (apiError) {
-          console.log("VideoDetail: API error detected for ID:", id, apiError);
-          setLoading(false);
-          setError(apiError);
-          setCurrentVideo(null); // 에러 시 데이터 초기화
-        } else if (apiFetchedVideoDetail) {
-          console.log(
-            "VideoDetail: API fetched detail received for ID:",
-            id,
-            apiFetchedVideoDetail,
-          );
-          setLoading(false);
-          setError(null);
-          setCurrentVideo(apiFetchedVideoDetail); // API 결과로 데이터 설정
-        }
-      } else {
-        // id 자체가 없는 경우 (잘못된 URL)
-        console.log("VideoDetail: Video ID is missing.");
+    setLoading(true); // 새 비디오 로딩 시작
+    setError(null); // 에러 초기화
+    setCurrentVideo(null); // 이전 비디오 정보 초기화
+
+    if (!id) {
+      // ID가 없는 경우 (잘못된 URL 접근)
+      setError(new Error("Video ID is missing."));
+      setLoading(false);
+      return;
+    }
+
+    if (initialVideoData && initialVideoData.videoId === id) {
+      // 1. initialVideoData가 있고 현재 URL의 ID와 일치하면 그 데이터를 바로 사용 (클릭을 통해 넘어온 경우)
+      setCurrentVideo(initialVideoData);
+      setLoading(false);
+    } else {
+      // 2. initialVideoData가 없거나 ID가 다르면 API 호출 결과를 기다림 (직접 URL 접근 또는 다른 비디오 클릭 시)
+      if (apiLoading) {
+        // 로딩 중이므로 별도 처리 없음 (로딩 상태는 이미 true)
+      } else if (apiError) {
+        setError(apiError);
         setLoading(false);
-        setError(new Error("Video ID is missing."));
-        setCurrentVideo(null);
+      } else if (apiFetchedVideoDetail) {
+        setCurrentVideo(apiFetchedVideoDetail);
+        setLoading(false);
       }
     }
   }, [id, initialVideoData, apiLoading, apiError, apiFetchedVideoDetail]);

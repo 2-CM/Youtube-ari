@@ -34,7 +34,7 @@ const VideoGrid = () => {
               title={video.title}
               thumbnail={video.thumbnail}
               channelImage={video.channelImage}
-              channelName={video.channelname}
+              channelName={video.channelName}
               views={video.views}
               publishedAt={video.publishedAt}
               description={video.description}
