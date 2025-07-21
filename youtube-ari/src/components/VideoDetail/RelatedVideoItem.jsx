@@ -18,7 +18,7 @@ const RelatedVideoItem = ({ video, variant = "sidebar" }) => {
 
   return (
     <div
-      onClick={handleVideoClick}
+      onClick={() => handleVideoClick(video)}
       className={`group relative cursor-pointer rounded-xl ${
         isGrid
           ? "flex max-w-full flex-col"
