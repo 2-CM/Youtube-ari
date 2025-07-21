@@ -11,7 +11,7 @@ const MyPage = () => {
   return (
     <>
       <SideBar />
-      <div className="ml-[72px] mt-14 px-6">
+      <div className="ml-[72px] px-6 pt-14">
         {/* 사용자 프로필 영역 */}
         <div className="flex pt-3">
           <div className="mr-3 flex-shrink-0 items-center">
