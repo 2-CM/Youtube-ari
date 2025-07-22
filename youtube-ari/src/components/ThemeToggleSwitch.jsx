@@ -33,7 +33,7 @@ export default function ThemeToggleSwitch() {
       <button
         onClick={themeToggle}
         title={themeToggleTitle}
-        className={`flex h-8 w-14 items-center rounded-full p-1 transition-colors duration-300 ${theme === "dark" ? "bg-ytGray-30 outline outline-1 outline-white" : "bg-gray-200"}`}
+        className={`flex h-8 w-14 items-center rounded-full p-1 transition-colors duration-300 ${theme === "dark" ? "bg-ytGray-30 outline outline-1 outline-ytGray-20" : "bg-gray-200"}`}
       >
         <div
           className={`flex h-6 w-6 transform items-center justify-center rounded-full bg-white shadow-md transition-transform duration-300 ${theme === "dark" ? "translate-x-6" : "translate-x-0"}`}

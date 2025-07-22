@@ -79,7 +79,7 @@ h3 {
 
 /** HeaderUserMenu **/
 .signInBtn {
-  @apply text-ytBlue-50 hover:bg-ytBlue-10 flex items-center whitespace-nowrap rounded-full border border-solid border-ytGray-20 px-4 text-sm leading-9;
+  @apply text-ytBlue-50 hover:bg-ytBlue-10 flex items-center whitespace-nowrap rounded-full border border-solid border-ytGray-70 px-4 text-sm leading-9;
 }
 
 .avatarBtn {
