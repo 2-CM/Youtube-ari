@@ -1,19 +1,13 @@
-import SideBar from "../components/SideBar/SideBar";
 import VideoCard from "../components/VideoGrid/VideoCard";
 import mockVideos from "../data/mockVideos";
 
 import { ChevronRight, ChevronLeft, LogOut } from "lucide-react";
 
 const MyPage = ({ user, logout }) => {
-  if (!user) {
-    return <p className="pt-14">로그인 후 접근 가능합니다.</p>;
-  }
-
   const historyVideos = mockVideos.slice(0, 4);
 
   return (
     <>
-      <SideBar />
       <div className="ml-[72px] px-6 pt-14">
         {/* 사용자 프로필 영역 */}
         <div className="flex pt-3">
