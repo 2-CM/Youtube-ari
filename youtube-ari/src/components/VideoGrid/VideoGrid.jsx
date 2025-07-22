@@ -7,7 +7,7 @@ const VideoGrid = () => {
   // 로딩 상태 UI
   if (loading) {
     return (
-      <div className="ml-[72px] mt-14 text-center text-lg text-gray-600">
+      <div className="ml-[72px] pt-14 text-center text-lg text-gray-600">
         동영상을 불러오는 중입니다...
       </div>
     );
@@ -16,14 +16,14 @@ const VideoGrid = () => {
   // 에러 상태 UI
   if (error) {
     return (
-      <div className="ml-[72px] mt-14 text-center text-lg text-red-500">
+      <div className="ml-[72px] pt-14 text-center text-lg text-red-500">
         데이터를 불러오는 데 실패했습니다: {error.message}
       </div>
     );
   }
 
   return (
-    <div className="ml-[72px] mt-14">
+    <div className="ml-[72px] pt-14">
       <div className="mx-4 flex justify-center">
         <div className="videoGridCols">
           {videos.map((video) => (

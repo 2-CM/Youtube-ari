@@ -1,13 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import VideoThumbnail from "../VideoGrid/VideoThumbnail";
 import VideoCardMeta from "../VideoGrid/VideoCardMeta";
+import { useVideoNavigation } from "../../hooks/useVideoNavigation";
 
 const RelatedVideoItem = ({ video, variant = "sidebar" }) => {
   const navigate = useNavigate();
 
-  const handleVideoClick = () => {
-    navigate(`/video/${video.videoId}`);
-  };
+  const { handleVideoClick } = useVideoNavigation();
 
   const handleChannelClick = (e) => {
     e.stopPropagation();
@@ -19,7 +18,7 @@ const RelatedVideoItem = ({ video, variant = "sidebar" }) => {
 
   return (
     <div
-      onClick={handleVideoClick}
+      onClick={() => handleVideoClick(video)}
       className={`group relative cursor-pointer rounded-xl ${
         isGrid
           ? "flex max-w-full flex-col"

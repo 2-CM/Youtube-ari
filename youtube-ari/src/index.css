@@ -1,5 +1,29 @@
 @tailwind base;
 
+:root {
+  --color-ytGray-10: #f8f8f8; /* ytGray-10 */
+  --color-ytGray-20: #f0f0f0; /* ytGray-20 */
+  --color-ytGray-30: #f2f2f2; /* ytGray-30 */
+  --color-ytGray-40: #e5e5e5; /* ytGray-40 */
+  --color-ytGray-50: #d9d9d9; /* ytGray-50 */
+  --color-ytGray-60: #d3d3d3; /* ytGray-60 */
+  --color-ytGray-70: #c6c6c6; /* ytGray-70 */
+  --color-ytGray-90: #616161; /* ytGray-90 */
+  --ripple-bg-color: rgba(0, 0, 0, 0.1);
+}
+
+.dark {
+  --color-ytGray-10: #222222;
+  --color-ytGray-20: #aaaaaa;
+  --color-ytGray-30: #272727;
+  --color-ytGray-40: #3f3f3f;
+  --color-ytGray-50: #3d3d3d;
+  --color-ytGray-60: #303030;
+  --color-ytGray-70: #303030;
+  --color-ytGray-90: #121212;
+  --ripple-bg-color: rgba(255, 255, 255, 0.1);
+}
+
 input {
   @apply appearance-none border-none bg-transparent shadow-none outline-none;
 }
@@ -32,12 +56,16 @@ h3 {
   @apply ml-0 border-r border-[#1c62b9] py-[2px] pl-12 pr-1 shadow-[inset_0_1px_2px_rgba(0,0,0,0.3)];
 }
 
+.searchBtn {
+  @apply w-16 rounded-r-[40px] border border-ytGray-60 bg-ytGray-10 hover:border-ytGray-70 hover:bg-ytGray-20 dark:hover:border-ytGray-60 dark:hover:bg-ytGray-10;
+}
+
 .channelNameText {
-  @apply cursor-pointer hover:text-black;
+  @apply cursor-pointer hover:text-black dark:hover:text-white;
 }
 
 .tooltip {
-  @apply pointer-events-none absolute z-[1002] m-2 whitespace-nowrap rounded-sm bg-ytGray-90 p-2 text-xs text-white;
+  @apply pointer-events-none absolute z-[1002] m-2 whitespace-nowrap rounded-sm bg-ytGray-90 p-2 text-xs text-white dark:bg-ytGray-50;
   @apply tooltipAnimation;
 }
 
@@ -79,7 +107,7 @@ h3 {
 
 /** VideoCard **/
 .videoCardOverlay {
-  @apply absolute inset-0 rounded-xl bg-black transition-opacity duration-300 ease-out;
+  @apply absolute inset-0 rounded-xl bg-black transition-opacity duration-300 ease-out dark:bg-white;
 }
 
 /***** MyPage *****/
@@ -112,7 +140,7 @@ h3 {
   width: 100%;
   height: 100%;
   transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.1);
+  background: var(--ripple-bg-color);
   border-radius: inherit;
   opacity: 0;
   transition: opacity 0.6s;

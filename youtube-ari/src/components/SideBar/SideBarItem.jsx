@@ -13,7 +13,9 @@ const SideBarItem = ({ to, title, icon: Icon }) => {
             alt={title}
             strokeWidth={1.5}
             className={
-              isActive ? "h-6 w-6 text-black" : "h-6 w-6 text-ytGray-70"
+              isActive
+                ? "h-6 w-6 text-black dark:text-white"
+                : "h-6 w-6 text-ytGray-70"
             }
           />
         </div>
