@@ -19,6 +19,11 @@ export default {
           90: "var(--color-ytGray-90)",
         },
         darkBg: "#0F0F0F",
+        ytBlue: {
+          10: "var(--color-ytBlue-10)",
+          30: "var(--color-ytBlue-30)",
+          50: "var(--color-ytBlue-50)",
+        },
       },
     },
   },
