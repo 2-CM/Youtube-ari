@@ -9,6 +9,8 @@
   --color-ytGray-60: #d3d3d3; /* ytGray-60 */
   --color-ytGray-70: #c6c6c6; /* ytGray-70 */
   --color-ytGray-90: #616161; /* ytGray-90 */
+  --color-ytBlue-10: #def1ff;
+  --color-ytBlue-50: #1c62b9;
   --ripple-bg-color: rgba(0, 0, 0, 0.1);
 }
 
@@ -21,6 +23,8 @@
   --color-ytGray-60: #303030;
   --color-ytGray-70: #303030;
   --color-ytGray-90: #121212;
+  --color-ytBlue-10: #263850;
+  --color-ytBlue-50: #3ea6ff;
   --ripple-bg-color: rgba(255, 255, 255, 0.1);
 }
 
@@ -53,7 +57,7 @@ h3 {
 }
 
 .searchContainer:focus-within {
-  @apply ml-0 border-r border-[#1c62b9] py-[2px] pl-12 pr-1 shadow-[inset_0_1px_2px_rgba(0,0,0,0.3)];
+  @apply border-ytBlue-50 ml-0 border-r py-[2px] pl-12 pr-1 shadow-[inset_0_1px_2px_rgba(0,0,0,0.3)];
 }
 
 .searchBtn {
@@ -74,6 +78,10 @@ h3 {
 }
 
 /** HeaderUserMenu **/
+.signInBtn {
+  @apply text-ytBlue-50 hover:bg-ytBlue-10 flex items-center whitespace-nowrap rounded-full border border-solid border-ytGray-70 px-4 text-sm leading-9;
+}
+
 .avatarBtn {
   @apply flex items-center justify-center;
 }

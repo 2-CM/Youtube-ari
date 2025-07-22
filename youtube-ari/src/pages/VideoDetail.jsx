@@ -107,7 +107,7 @@ const VideoDetail = () => {
 
   return (
     <>
-      <div className="mx-auto flex flex-col pl-6 lg:flex-row">
+      <div className="mx-auto flex flex-col pl-6 pt-14 lg:flex-row">
         <div className="flex-1 pr-6 pt-6">
           <div className="aspect-video min-h-[320px] min-w-[640px] overflow-hidden rounded-lg">
             <iframe

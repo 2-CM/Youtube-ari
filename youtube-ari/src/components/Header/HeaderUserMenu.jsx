@@ -1,21 +1,32 @@
 import ThemeToggleSwitch from "../ThemeToggleSwitch";
-import channelImage from "../../assets/mock_channelImage_3.jpg";
 import { useNavigate } from "react-router-dom";
+import { UserCircle } from "lucide-react";
 
-const HeaderUserMenu = () => {
+const HeaderUserMenu = ({ user, login }) => {
   const navigate = useNavigate();
   const handleProfileClick = () => {
     navigate(`/you`);
   };
 
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex flex-row items-center justify-center gap-2">
       <ThemeToggleSwitch />
-      <button className="avatarBtn px-2" onClick={handleProfileClick}>
-        <div className="avatarImageWrapper flex-shrink-0">
-          <img src={channelImage} alt="Avatar Image" className="h-8 w-8" />
-        </div>
-      </button>
+      {!user ? (
+        <button onClick={login} className="signInBtn">
+          <UserCircle strokeWidth={1.25} className="-ml-2 mr-2 h-6 w-6" />
+          <span className="font-medium">Sign in</span>
+        </button>
+      ) : (
+        <button className="avatarBtn px-2" onClick={handleProfileClick}>
+          <div className="avatarImageWrapper flex-shrink-0">
+            <img
+              src={`${user.photoURL}?sz=100`}
+              alt="User Avatar"
+              className="h-8 w-8 rounded-full"
+            />
+          </div>
+        </button>
+      )}
     </div>
   );
 };
