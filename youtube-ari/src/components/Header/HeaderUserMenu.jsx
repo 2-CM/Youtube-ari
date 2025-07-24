@@ -1,7 +1,7 @@
 import ThemeToggleSwitch from "../ThemeToggleSwitch";
 import { useNavigate } from "react-router-dom";
 import { UserCircle } from "lucide-react";
-import { useAuthContext } from "../../hooks/useAuthContext";
+import useAuthContext from "../../hooks/useAuthContext";
 
 const HeaderUserMenu = () => {
   const { currentUser, login } = useAuthContext();

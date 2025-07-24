@@ -1,11 +1,9 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { auth, provider } from "../firebase";
 import { onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
+import { AuthContext } from "./AuthContext";
 
-// Context 생성
-const AuthContext = createContext(null);
-
-// Provider 컴포넌트
+// AuthProvider 컴포넌트만 내보냄.
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
 

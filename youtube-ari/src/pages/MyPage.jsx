@@ -9,7 +9,7 @@ import {
   TvMinimalPlay,
 } from "lucide-react";
 
-import { useAuthContext } from "../../hooks/useAuthContext";
+import useAuthContext from "../hooks/useAuthContext";
 
 const MyPage = () => {
   const historyVideos = mockVideos.slice(0, 4);
