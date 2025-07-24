@@ -23,7 +23,7 @@ const HeaderUserMenu = () => {
         <button className="avatarBtn px-2" onClick={handleProfileClick}>
           <div className="avatarImageWrapper flex-shrink-0">
             <img
-              src={`${currentUser.photoURL}?sz=100`}
+              src={currentUser.photoURL}
               alt="User Avatar"
               className="h-8 w-8 rounded-full"
             />

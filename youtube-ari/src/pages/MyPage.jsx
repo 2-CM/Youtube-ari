@@ -42,7 +42,7 @@ const MyPage = () => {
           <div className="mr-3 flex-shrink-0 items-center">
             <div className="avatarImageWrapper">
               <img
-                src={`${currentUser.photoURL}?sz=100`}
+                src={currentUser.photoURL}
                 alt="Avatar Image"
                 className="h-32 w-32"
               />
