@@ -9,10 +9,13 @@ import {
   TvMinimalPlay,
 } from "lucide-react";
 
-const MyPage = ({ user, login, logout }) => {
-  const historyVideos = mockVideos.slice(0, 4);
+import { useAuthContext } from "../../hooks/useAuthContext";
 
-  if (!user) {
+const MyPage = () => {
+  const historyVideos = mockVideos.slice(0, 4);
+  const { currentUser, login, logout } = useAuthContext();
+
+  if (!currentUser) {
     return (
       <div className="ml-[72px] flex flex-col items-center justify-center px-6 pt-32">
         <TvMinimalPlay strokeWidth={1} className="h-32 w-32" />
@@ -39,14 +42,14 @@ const MyPage = ({ user, login, logout }) => {
           <div className="mr-3 flex-shrink-0 items-center">
             <div className="avatarImageWrapper">
               <img
-                src={`${user.photoURL}?sz=100`}
+                src={`${currentUser.photoURL}?sz=100`}
                 alt="Avatar Image"
                 className="h-32 w-32"
               />
             </div>
           </div>
           <div className="flex cursor-pointer flex-col justify-between">
-            <div className="text-4xl font-bold">{user.displayName}</div>
+            <div className="text-4xl font-bold">{currentUser.displayName}</div>
             <div className="text-sm text-ytGray-90 dark:text-ytGray-20">
               Create a channel
             </div>
