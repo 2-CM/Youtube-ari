@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../firebase";
+import { auth, provider } from "../firebase";
+import { onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
 
 // Context 생성
 const AuthContext = createContext(null);
@@ -20,9 +20,27 @@ export const AuthProvider = ({ children }) => {
     return () => unsubscribe();
   }, []);
 
+  // 로그인 함수
+  const login = async () => {
+    try {
+      await signInWithPopup(auth, provider);
+    } catch (err) {
+      console.error("Google 로그인 실패:", err);
+    }
+  };
+
+  // 로그아웃 함수
+  const logout = async () => {
+    try {
+      await signOut(auth);
+    } catch (err) {
+      console.error("로그아웃 실패:", err);
+    }
+  };
+
   // Context.Provider로 하위 컴포넌트에 currentUser 공유
   return (
-    <AuthContext.Provider value={{ currentUser }}>
+    <AuthContext.Provider value={{ currentUser, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
