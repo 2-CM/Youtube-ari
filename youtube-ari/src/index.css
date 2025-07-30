@@ -124,7 +124,7 @@ h3 {
 
 /***** MyPage *****/
 .logoutBtn {
-  @apply my-3 flex h-8 items-center justify-center rounded-full bg-ytGray-30 hover:bg-ytGray-50 active:bg-ytGray-70;
+  @apply my-3 flex h-8 w-32 items-center justify-center rounded-full bg-ytGray-30 hover:bg-ytGray-50 active:bg-ytGray-70;
 }
 
 .myPageBtn-common {
