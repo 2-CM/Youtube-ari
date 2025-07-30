@@ -1,7 +1,8 @@
-import ThemeToggleSwitch from "../ThemeToggleSwitch";
+import ThemeToggleSwitch from "../common/ThemeToggleSwitch";
 import { useNavigate } from "react-router-dom";
 import { UserCircle } from "lucide-react";
 import useAuthContext from "../../hooks/useAuthContext";
+import Avatar from "../common/Avatar";
 
 const HeaderUserMenu = () => {
   const { currentUser, login } = useAuthContext();
@@ -22,9 +23,8 @@ const HeaderUserMenu = () => {
       ) : (
         <button className="avatarBtn px-2" onClick={handleProfileClick}>
           <div className="avatarImageWrapper flex-shrink-0">
-            <img
+            <Avatar
               src={currentUser.photoURL}
-              alt="User Avatar"
               className="h-8 w-8 rounded-full"
             />
           </div>

@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../context/AuthContext.jsx";
 
 // AuthContext를 쉽게 사용할 수 있도록 하는 커스텀 훅
 const useAuthContext = () => {
