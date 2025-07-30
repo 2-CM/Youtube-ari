@@ -5,7 +5,7 @@ import VideoGridSkeleton from "./VideoGridSkeleton";
 const VideoGrid = () => {
   const { videos, loading, error } = usePopularVideos();
 
-  // 로딩 상태 UI (분리된 VideoSkeleton 컴포넌트 사용)
+  // 로딩 상태 UI (분리된 VideoGridSkeleton 컴포넌트 사용)
   if (loading) {
     return (
       <div className="ml-[72px] pt-14">
@@ -18,7 +18,7 @@ const VideoGrid = () => {
   if (error) {
     return (
       <div className="ml-[72px] pt-14 text-center text-lg text-red-500">
-        데이터를 불러오는 데 실패했습니다: {error.message}
+        Failed to load video: {error.message}
       </div>
     );
   }

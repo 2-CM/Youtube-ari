@@ -14,7 +14,7 @@ const RelatedVideos = ({ videos, error }) => {
   if (!videos || videos.length === 0) {
     return (
       <div className="p-4 text-center text-gray-600">
-        No recommended videos found.
+        Loading recommended videos...
       </div>
     );
   }
