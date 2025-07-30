@@ -1,4 +1,4 @@
-import ThemeToggleSwitch from "../ThemeToggleSwitch";
+import ThemeToggleSwitch from "../common/ThemeToggleSwitch";
 import { useNavigate } from "react-router-dom";
 import { UserCircle } from "lucide-react";
 import useAuthContext from "../../hooks/useAuthContext";
