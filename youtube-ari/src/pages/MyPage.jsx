@@ -1,4 +1,5 @@
 import VideoCard from "../components/VideoGrid/VideoCard";
+import Avatar from "../components/common/Avatar";
 import mockVideos from "../data/mockVideos";
 
 import {
@@ -41,11 +42,7 @@ const MyPage = () => {
         <div className="flex pt-3">
           <div className="mr-3 flex-shrink-0 items-center">
             <div className="avatarImageWrapper">
-              <img
-                src={currentUser.photoURL}
-                alt="Avatar Image"
-                className="h-32 w-32"
-              />
+              <Avatar src={currentUser.photoURL} className="h-32 w-32" />
             </div>
           </div>
           <div className="flex cursor-pointer flex-col justify-between">
