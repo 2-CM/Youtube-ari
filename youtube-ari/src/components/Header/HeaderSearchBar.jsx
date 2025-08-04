@@ -1,11 +1,27 @@
 import { Search, Mic } from "lucide-react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const HeaderSearchBar = () => {
+  const [searchTerm, setSearchTerm] = useState(""); // 검색어 상태
+  const navigate = useNavigate();
+  const handleSearchSubmit = (event) => {
+    event.preventDefault(); // 기본 폼 제출 방지
+
+    if (searchTerm.trim()) {
+      // 검색어가 비어있지 않은지 확인
+      // 검색 결과 페이지로 이동하며 검색어를 쿼리 파라미터로 전달
+      navigate(
+        `/results?search_query=${encodeURIComponent(searchTerm.trim())}`,
+      );
+    }
+  };
+
   return (
     <div className="flex flex-shrink flex-grow-0 basis-[732px] flex-row items-center">
       <div className="relative ml-10 flex h-10 flex-1 px-1">
         <div className="searchContainer dark:bg-ytGray-90 dark:shadow-none">
-          <form action="/result" className="flex flex-1">
+          <form onSubmit={handleSearchSubmit} className="flex flex-1">
             <input
               name="search_query"
               type="text"
@@ -16,6 +32,8 @@ const HeaderSearchBar = () => {
               aria-expanded="false"
               aria-controls="autocomplete-list"
               className="peer my-0 w-full py-px text-base font-normal"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)} // 입력 값 업데이트
             />
             <div className="absolute left-4 top-1/2 hidden translate-y-[-50%] peer-focus:block">
               <Search
@@ -26,7 +44,12 @@ const HeaderSearchBar = () => {
             </div>
           </form>
         </div>
-        <button aria-label="Search Btn" title="Search" className="searchBtn">
+        <button
+          onClick={handleSearchSubmit}
+          aria-label="Search Btn"
+          title="Search"
+          className="searchBtn"
+        >
           <Search
             alt="Search Btn"
             className="inline-flex h-6 w-6"
