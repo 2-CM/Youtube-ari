@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import MyPage from "./pages/MyPage";
 import VideoDetail from "./pages/VideoDetail";
 import LayoutWithSidebar from "./components/SideBar/LayoutWithSidebar";
+import SearchResults from "./pages/SearchResults";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route element={<LayoutWithSidebar />}>
           <Route path="/" element={<Home />} />
+          <Route path="/results" element={<SearchResults />} />
           <Route path="/you" element={<MyPage />} />
         </Route>
         <Route path="/video/:id" element={<VideoDetail />} />
