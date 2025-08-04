@@ -1,9 +1,11 @@
 import { Search, Mic, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 const HeaderSearchBar = () => {
   const [searchTerm, setSearchTerm] = useState(""); // 검색어 상태
+  const inputRef = useRef(null); // input 요소에 접근하기 위한 ref 생성
+
   const navigate = useNavigate();
   const handleSearchSubmit = (event) => {
     event.preventDefault(); // 기본 폼 제출 방지
@@ -20,6 +22,10 @@ const HeaderSearchBar = () => {
   // X 버튼 클릭 시 검색어 지우는 핸들러
   const handleClearSearch = () => {
     setSearchTerm("");
+    // inputRef.current가 존재하면 포커스 설정
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
   };
 
   return (
@@ -28,6 +34,7 @@ const HeaderSearchBar = () => {
         <div className="searchContainer dark:bg-ytGray-90 dark:shadow-none">
           <form onSubmit={handleSearchSubmit} className="flex flex-1">
             <input
+              ref={inputRef}
               name="search_query"
               type="text"
               role="combobox"
