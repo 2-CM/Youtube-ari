@@ -1,4 +1,4 @@
-import { Search, Mic } from "lucide-react";
+import { Search, Mic, X } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -15,6 +15,11 @@ const HeaderSearchBar = () => {
         `/results?search_query=${encodeURIComponent(searchTerm.trim())}`,
       );
     }
+  };
+
+  // X 버튼 클릭 시 검색어 지우는 핸들러
+  const handleClearSearch = () => {
+    setSearchTerm("");
   };
 
   return (
@@ -43,6 +48,21 @@ const HeaderSearchBar = () => {
               />
             </div>
           </form>
+
+          {/* 검색어가 있을 때만 X 버튼 표시 */}
+          {searchTerm && (
+            <button
+              type="button" // 폼 제출을 막기 위해 type="button" 설정
+              onClick={handleClearSearch}
+              className="absolute right-2 top-1/2 h-10 w-10 -translate-y-1/2 rounded-full p-1 hover:bg-black/10 focus:outline-none dark:hover:bg-white/20"
+              aria-label="Clear search"
+            >
+              <X
+                strokeWidth={0.75}
+                className="h-full w-full text-black dark:text-white"
+              />
+            </button>
+          )}
         </div>
         <button
           onClick={handleSearchSubmit}
