@@ -27,21 +27,23 @@ const VideoGrid = () => {
     <div className="ml-[72px] pt-14">
       <div className="mx-4 flex justify-center">
         <div className="videoGridCols">
-          {videos.map((video) => (
-            <VideoCard
-              key={video.videoId}
-              videoId={video.videoId}
-              channelId={video.channelId}
-              title={video.title}
-              thumbnail={video.thumbnail}
-              channelImage={video.channelImage}
-              channelName={video.channelName}
-              views={video.views}
-              publishedAt={video.publishedAt}
-              description={video.description}
-              mode="videoGrid"
-            />
-          ))}
+          {videos
+            .filter((video) => video.videoId)
+            .map((video) => (
+              <VideoCard
+                key={video.videoId}
+                videoId={video.videoId}
+                channelId={video.channelId}
+                title={video.title}
+                thumbnail={video.thumbnail}
+                channelImage={video.channelImage}
+                channelName={video.channelName}
+                views={video.views}
+                publishedAt={video.publishedAt}
+                description={video.description}
+                mode="videoGrid"
+              />
+            ))}
         </div>
       </div>
     </div>
