@@ -40,7 +40,7 @@ export function formatTimeAgo(dateString) {
 // YouTube API의 raw video 객체와 채널 이미지 정보를 받아 UI에 보여줄 데이터 형태로 변환하는 함수
 export function transformVideo(video, channelImageUrl) {
   return {
-    videoId: video.id,
+    videoId: video.id?.videoId || video.id,
     channelId: video.snippet.channelId,
     channelName: video.snippet.channelTitle,
     title: video.snippet.title,
