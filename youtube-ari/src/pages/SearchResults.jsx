@@ -1,11 +1,16 @@
-import VideoCard from "./VideoCard";
-import { usePopularVideos } from "../../hooks/usePopularVideos";
-import VideoGridSkeleton from "./VideoGridSkeleton";
+import { useLocation } from "react-router-dom";
+import VideoCard from "../components/VideoGrid/VideoCard";
+import VideoGridSkeleton from "../components/VideoGrid/VideoGridSkeleton";
+import { useSearchVideos } from "../hooks/useSearchVideos";
 
-const VideoGrid = () => {
-  const { videos, loading, error } = usePopularVideos();
+const SearchResults = () => {
+  const location = useLocation();
+  // URL에서 'search_query' 쿼리 파라미터(검색어)를 추출
+  const queryParams = new URLSearchParams(location.search);
+  const searchQuery = queryParams.get("search_query");
+  const { videos, loading, error } = useSearchVideos(searchQuery);
 
-  // 로딩 상태 UI (분리된 VideoGridSkeleton 컴포넌트 사용)
+  // 로딩 상태 UI
   if (loading) {
     return (
       <div className="ml-[72px] pt-14">
@@ -18,7 +23,7 @@ const VideoGrid = () => {
   if (error) {
     return (
       <div className="ml-[72px] pt-14 text-center text-lg text-red-500">
-        Failed to load video: {error.message}
+        Failed to load search results: {error.message || "Unknown error"}
       </div>
     );
   }
@@ -28,7 +33,7 @@ const VideoGrid = () => {
       <div className="mx-4 flex justify-center">
         <div className="videoGridCols">
           {videos
-            .filter((video) => video.videoId)
+            .filter((v) => v.videoId)
             .map((video) => (
               <VideoCard
                 key={video.videoId}
@@ -50,4 +55,4 @@ const VideoGrid = () => {
   );
 };
 
-export default VideoGrid;
+export default SearchResults;

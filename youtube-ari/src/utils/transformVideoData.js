@@ -37,17 +37,23 @@ export function formatTimeAgo(dateString) {
   return `${Math.floor(seconds)} seconds ago`;
 }
 
+// HTML 엔티티(예: &#39;, &amp;, &quot;)로 인코딩된 문자열을 일반 문자로 디코딩
+const decodeHTML = (html) => {
+  const doc = new DOMParser().parseFromString(html, "text/html");
+  return doc.documentElement.textContent;
+};
+
 // YouTube API의 raw video 객체와 채널 이미지 정보를 받아 UI에 보여줄 데이터 형태로 변환하는 함수
 export function transformVideo(video, channelImageUrl) {
   return {
-    videoId: video.id,
+    videoId: video.id?.videoId || video.id,
     channelId: video.snippet.channelId,
     channelName: video.snippet.channelTitle,
-    title: video.snippet.title,
+    title: decodeHTML(video.snippet.title),
     views: formatViewCount(video.statistics?.viewCount || 0),
     publishedAt: formatTimeAgo(video.snippet.publishedAt),
     thumbnail: video.snippet.thumbnails.medium.url,
     channelImage: channelImageUrl,
-    description: video.snippet.description || "",
+    description: decodeHTML(video.snippet.description) || "",
   };
 }
