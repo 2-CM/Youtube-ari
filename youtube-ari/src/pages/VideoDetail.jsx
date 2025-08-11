@@ -12,12 +12,12 @@ const VideoDetail = () => {
   const location = useLocation();
   const initialVideoData = location.state?.video; // VideoCard에서 넘어온 데이터
 
-  // useVideoDetail 훅: initialVideoData가 있다면 API 호출을 건너뜀
+  // useVideoDetail 커스텀 훅
   const {
     videoDetail: apiFetchedVideoDetail,
     loading: apiLoading,
     error: apiError,
-  } = useVideoDetail(initialVideoData ? null : id); // 초기 데이터 있으면 null 전달
+  } = useVideoDetail(id);
 
   const { videos: popularVideos, error: popularError } = usePopularVideos();
 

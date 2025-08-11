@@ -37,10 +37,22 @@ export const useSearchVideos = (searchQuery) => {
               getVideoDetails(videoId),
             ]);
 
-            // search API에서 받은 video 객체와 getVideoDetails에서 받은 videoDetails를 합쳐서 전달
+            // search API 데이터 + 상세 API 데이터(snippet, statistics)를 합쳐서 전달
             const combinedVideoData = {
               ...video,
-              statistics: videoDetails?.statistics, // getVideoDetails에서 가져온 통계 정보 추가
+              // 상세 snippet으로 덮어써서 잘린 설명 대신 전체 설명 사용
+              snippet: {
+                ...video.snippet,
+                ...(videoDetails?.snippet && {
+                  title: videoDetails.snippet.title,
+                  description: videoDetails.snippet.description,
+                  publishedAt: videoDetails.snippet.publishedAt,
+                  channelTitle: videoDetails.snippet.channelTitle,
+                  channelId: videoDetails.snippet.channelId,
+                  thumbnails: videoDetails.snippet.thumbnails,
+                }),
+              },
+              statistics: videoDetails?.statistics ?? video.statistics, // 통계 정보 병합
             };
             return transformVideo(combinedVideoData, channelImage);
           }
