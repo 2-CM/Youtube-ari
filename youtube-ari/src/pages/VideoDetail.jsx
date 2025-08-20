@@ -21,7 +21,7 @@ const VideoDetail = () => {
     error: apiError,
   } = useVideoDetail(cleanId);
 
-  // useRelatedVideos 커스텀 훅
+  // useSimilarVideos 커스텀 훅
   const {
     videos: relatedVideos,
     loading: relatedLoading,
@@ -46,23 +46,30 @@ const VideoDetail = () => {
       return;
     }
 
-    if (initialVideoData && initialVideoData.videoId === cleanId) {
-      // 1. initialVideoData가 있고 현재 URL의 ID와 일치하면 그 데이터를 바로 사용 (클릭을 통해 넘어온 경우)
+    // 초기 데이터가 있으면 일단 먼저 보여주고
+    if (initialVideoData?.videoId === cleanId) {
       setCurrentVideo(initialVideoData);
-      setLoading(false);
-    } else {
-      // 2. initialVideoData가 없거나 ID가 다르면 API 호출 결과를 기다림 (직접 URL 접근 또는 다른 비디오 클릭 시)
-      if (apiLoading) {
-        // 로딩 중이므로 별도 처리 없음 (로딩 상태는 이미 true)
-      } else if (apiError) {
-        setError(apiError);
-        setLoading(false);
-      } else if (apiFetchedVideoDetail) {
-        setCurrentVideo(apiFetchedVideoDetail);
-        setLoading(false);
-      }
+      // 로딩은 true 유지해서 API로 보강되면 자연스럽게 교체 가능
     }
-  }, [cleanId, initialVideoData, apiLoading, apiError, apiFetchedVideoDetail]);
+
+    // API 상태 반영
+    if (apiError) {
+      setError(apiError);
+      setLoading(false);
+      return;
+    }
+
+    // API가 오면 초기 데이터와 머지
+    if (apiFetchedVideoDetail) {
+      setCurrentVideo((prev) => {
+        // prev가 없으면 API 걸로 바로
+        if (!prev) return apiFetchedVideoDetail;
+        // 기존 초기데이터에 API 결과를 덮어쓰기
+        return { ...prev, ...apiFetchedVideoDetail };
+      });
+      setLoading(false);
+    }
+  }, [cleanId, initialVideoData, apiError, apiFetchedVideoDetail]);
 
   // 로딩 UI
   if (loading) {
@@ -90,10 +97,6 @@ const VideoDetail = () => {
       </div>
     );
   }
-
-  const handleChannelClick = () => {
-    // navigate(`/@${video.channelName}`);
-  };
 
   const {
     title,
@@ -125,7 +128,6 @@ const VideoDetail = () => {
               channelImage={channelImage}
               channelName={channelName}
               channelId={channelId}
-              handleChannelClick={handleChannelClick}
             />
             <Description
               views={views}
