@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { useVideoDetail } from "../hooks/useVideoDetail";
-import { usePopularVideos } from "../hooks/usePopularVideos";
+import { useSimilarVideos } from "../hooks/useSimilarVideos";
+import { sanitizeVideoId } from "../utils/videoId";
 
 import ChannelInfo from "../components/VideoDetail/ChannelInfo";
 import Description from "../components/VideoDetail/Description";
@@ -9,60 +10,66 @@ import RelatedVideos from "../components/VideoDetail/RelatedVideos";
 
 const VideoDetail = () => {
   const { id } = useParams();
+  const cleanId = sanitizeVideoId(id);
   const location = useLocation();
-  const initialVideoData = location.state?.video; // VideoCard에서 넘어온 데이터
+  const initialVideoData = location.state?.video; // VideoCard에서 넘어온 초기 데이터
 
   // useVideoDetail 커스텀 훅
   const {
     videoDetail: apiFetchedVideoDetail,
     loading: apiLoading,
     error: apiError,
-  } = useVideoDetail(id);
+  } = useVideoDetail(cleanId);
 
-  const { videos: popularVideos, error: popularError } = usePopularVideos();
+  // useSimilarVideos 커스텀 훅
+  const {
+    videos: relatedVideos,
+    loading: relatedLoading,
+    error: relatedError,
+  } = useSimilarVideos(cleanId);
 
-  // 현재 동영상 데이터, 로딩, 에러 상태 관리
-  const [currentVideo, setCurrentVideo] = useState(initialVideoData || null);
+  // 현재 재생 중인 비디오 상태
+  const [currentVideo, setCurrentVideo] = useState(initialVideoData);
   const [loading, setLoading] = useState(!initialVideoData);
   const [error, setError] = useState(null);
 
-  // useEffect: id 또는 initialVideoData, API 응답에 따라 currentVideo 및 로딩/에러 상태 관리
+  // id/초기데이터/API 응답에 따라 현재 비디오 결정
   useEffect(() => {
     setLoading(true); // 새 비디오 로딩 시작
     setError(null); // 에러 초기화
     setCurrentVideo(null); // 이전 비디오 정보 초기화
 
-    if (!id) {
+    if (!cleanId) {
       // ID가 없는 경우 (잘못된 URL 접근)
       setError(new Error("Video ID is missing."));
       setLoading(false);
       return;
     }
 
-    if (initialVideoData && initialVideoData.videoId === id) {
-      // 1. initialVideoData가 있고 현재 URL의 ID와 일치하면 그 데이터를 바로 사용 (클릭을 통해 넘어온 경우)
+    // 초기 데이터가 있으면 일단 먼저 보여주고
+    if (initialVideoData?.videoId === cleanId) {
       setCurrentVideo(initialVideoData);
-      setLoading(false);
-    } else {
-      // 2. initialVideoData가 없거나 ID가 다르면 API 호출 결과를 기다림 (직접 URL 접근 또는 다른 비디오 클릭 시)
-      if (apiLoading) {
-        // 로딩 중이므로 별도 처리 없음 (로딩 상태는 이미 true)
-      } else if (apiError) {
-        setError(apiError);
-        setLoading(false);
-      } else if (apiFetchedVideoDetail) {
-        setCurrentVideo(apiFetchedVideoDetail);
-        setLoading(false);
-      }
+      // 로딩은 true 유지해서 API로 보강되면 자연스럽게 교체 가능
     }
-  }, [id, initialVideoData, apiLoading, apiError, apiFetchedVideoDetail]);
 
-  // Related video 목록 (자기 자신 제외)
-  const randomVideos = popularVideos
-    ? popularVideos
-        .filter((v) => v.videoId !== id)
-        .sort(() => Math.random() - 0.5)
-    : [];
+    // API 상태 반영
+    if (apiError) {
+      setError(apiError);
+      setLoading(false);
+      return;
+    }
+
+    // API가 오면 초기 데이터와 머지
+    if (apiFetchedVideoDetail) {
+      setCurrentVideo((prev) => {
+        // prev가 없으면 API 걸로 바로
+        if (!prev) return apiFetchedVideoDetail;
+        // 기존 초기데이터에 API 결과를 덮어쓰기
+        return { ...prev, ...apiFetchedVideoDetail };
+      });
+      setLoading(false);
+    }
+  }, [cleanId, initialVideoData, apiError, apiFetchedVideoDetail]);
 
   // 로딩 UI
   if (loading) {
@@ -91,10 +98,6 @@ const VideoDetail = () => {
     );
   }
 
-  const handleChannelClick = () => {
-    // navigate(`/@${video.channelName}`);
-  };
-
   const {
     title,
     channelName,
@@ -112,7 +115,7 @@ const VideoDetail = () => {
           <div className="aspect-video min-h-[320px] min-w-[640px] overflow-hidden rounded-lg">
             <iframe
               className="h-full w-full"
-              src={`https://www.youtube.com/embed/${id}?autoplay=1`}
+              src={`https://www.youtube.com/embed/${cleanId}?autoplay=1`}
               title={title}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               referrerPolicy="strict-origin-when-cross-origin"
@@ -125,7 +128,6 @@ const VideoDetail = () => {
               channelImage={channelImage}
               channelName={channelName}
               channelId={channelId}
-              handleChannelClick={handleChannelClick}
             />
             <Description
               views={views}
@@ -137,7 +139,11 @@ const VideoDetail = () => {
 
         {/* 추천영상 */}
         <div className="pr-6 pt-6">
-          <RelatedVideos videos={randomVideos} error={popularError} />
+          <RelatedVideos
+            videos={relatedVideos}
+            loading={relatedLoading}
+            error={relatedError}
+          />
         </div>
       </div>
     </>

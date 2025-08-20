@@ -85,3 +85,65 @@ export const searchVideos = async (query, maxResults = 20) => {
     throw error;
   }
 };
+
+/**
+ * (대체) 연관 영상: 제목/태그/카테고리 기반 유사 검색
+ * relatedToVideoId는 더 이상 지원되지 않아 INVALID_ARGUMENT(400) 발생.
+ * - query: 제목/태그로 만든 질의어
+ * - categoryId: 기준 영상 categoryId
+ * - excludeChannelId: 같은 채널 과다 노출을 줄이고 싶을 때 제외
+ */
+export const searchSimilarVideos = async ({
+  query,
+  categoryId,
+  excludeChannelId,
+  maxResults = 20,
+  regionCode = "KR",
+}) => {
+  try {
+    const response = await youtube.get("/search", {
+      params: {
+        part: "snippet",
+        type: "video",
+        q: query,
+        videoCategoryId: categoryId || undefined,
+        regionCode,
+        maxResults: Math.min(Math.max(maxResults, 1), 50),
+        videoEmbeddable: "true",
+        relevanceLanguage: "ko",
+      },
+    });
+
+    const items = response.data.items || [];
+    return excludeChannelId
+      ? items.filter((it) => it.snippet?.channelId !== excludeChannelId)
+      : items;
+  } catch (error) {
+    console.error(
+      "Error searching similar videos >",
+      error?.response?.data || error,
+    );
+    throw error;
+  }
+};
+
+// 상세 보강용: 여러 ID 한 번에 조회 (통계/길이/전체 설명 포함)
+export const getVideosByIds = async (ids = []) => {
+  if (!ids.length) return [];
+  try {
+    const res = await youtube.get("/videos", {
+      params: {
+        part: "snippet,contentDetails,statistics",
+        id: ids.join(","),
+        maxResults: ids.length,
+      },
+    });
+    return res.data.items || [];
+  } catch (error) {
+    console.error(
+      "Error fetching videos by ids >",
+      error?.response?.data || error,
+    );
+    throw error;
+  }
+};
