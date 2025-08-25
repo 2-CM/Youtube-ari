@@ -77,7 +77,7 @@ export const getVideoDetails = async (videoId) => {
 };
 
 // 검색 결과 동영상
-export const searchVideos = async (query, maxResults = 20) => {
+export const searchVideos = async (query, maxResults = 20, cursor = null) => {
   try {
     const response = await youtube.get("/search", {
       params: {
@@ -85,9 +85,13 @@ export const searchVideos = async (query, maxResults = 20) => {
         q: query, // 사용자가 입력한 검색어
         type: "video", // 동영상만 검색하도록 지정 (채널, 재생목록 제외)
         maxResults,
+        pageToken: cursor || undefined,
       },
     });
-    return response.data.items;
+    return {
+      items: response.data.items ?? [],
+      nextCursor: response.data.nextPageToken ?? null,
+    };
   } catch (error) {
     console.error(`Error searching videos for "${query}":`, error);
     throw error;

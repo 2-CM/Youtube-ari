@@ -8,7 +8,8 @@ const SearchResults = () => {
   // URL에서 'search_query' 쿼리 파라미터(검색어)를 추출
   const queryParams = new URLSearchParams(location.search);
   const searchQuery = queryParams.get("search_query");
-  const { videos, loading, error } = useSearchVideos(searchQuery);
+  const { videos, loading, error, hasMore, sentinelRef } =
+    useSearchVideos(searchQuery);
 
   // 로딩 상태 UI
   if (loading) {
@@ -51,6 +52,23 @@ const SearchResults = () => {
             ))}
         </div>
       </div>
+
+      {/* 무한스크롤 센티널 */}
+      {hasMore && (
+        <div ref={sentinelRef} style={{ height: 1 }} aria-hidden="true" />
+      )}
+
+      {/* 추가 로딩 UI (다음 페이지 불러올 때) */}
+      {loading && videos.length > 0 && (
+        <div className="py-6 text-center text-gray-500">Loading more…</div>
+      )}
+
+      {/* 끝까지 다 불러왔을 때 표시 */}
+      {!hasMore && videos.length > 0 && (
+        <div className="py-6 text-center text-sm text-gray-400">
+          No more videos
+        </div>
+      )}
     </div>
   );
 };
