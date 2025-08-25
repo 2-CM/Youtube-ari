@@ -14,7 +14,11 @@ const youtube = axios.create({
 });
 
 // 인기 동영상
-export const getPopularVideos = async (maxResults = 12, regionCode = "KR") => {
+export const getPopularVideos = async (
+  maxResults = 12,
+  regionCode = "KR",
+  cursor = null,
+) => {
   try {
     const response = await youtube.get("/videos", {
       params: {
@@ -22,9 +26,13 @@ export const getPopularVideos = async (maxResults = 12, regionCode = "KR") => {
         chart: "mostPopular",
         regionCode,
         maxResults,
+        pageToken: cursor || undefined,
       },
     });
-    return response.data.items;
+    return {
+      items: response.data.items ?? [],
+      nextCursor: response.data.nextPageToken ?? null,
+    };
   } catch (error) {
     console.error("Error fetching popular videos", error);
     throw error;

@@ -3,7 +3,7 @@ import { usePopularVideos } from "../../hooks/usePopularVideos";
 import VideoGridSkeleton from "./VideoGridSkeleton";
 
 const VideoGrid = () => {
-  const { videos, loading, error } = usePopularVideos();
+  const { videos, loading, error, hasMore, sentinelRef } = usePopularVideos();
 
   // 로딩 상태 UI (분리된 VideoGridSkeleton 컴포넌트 사용)
   if (loading) {
@@ -46,6 +46,23 @@ const VideoGrid = () => {
             ))}
         </div>
       </div>
+
+      {/* 무한스크롤 센티널 */}
+      {hasMore && (
+        <div ref={sentinelRef} style={{ height: 1 }} aria-hidden="true" />
+      )}
+
+      {/* 추가 로딩 UI (다음 페이지 불러올 때) */}
+      {loading && videos.length > 0 && (
+        <div className="py-6 text-center text-gray-500">Loading more…</div>
+      )}
+
+      {/* 끝까지 다 불러왔을 때 표시 */}
+      {!hasMore && videos.length > 0 && (
+        <div className="py-6 text-center text-sm text-gray-400">
+          No more videos
+        </div>
+      )}
     </div>
   );
 };
