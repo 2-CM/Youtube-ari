@@ -77,7 +77,7 @@ export const getVideoDetails = async (videoId) => {
 };
 
 // 검색 결과 동영상
-export const searchVideos = async (query, maxResults = 20, cursor = null) => {
+export const searchVideos = async (query, maxResults = 12, cursor = null) => {
   try {
     const response = await youtube.get("/search", {
       params: {

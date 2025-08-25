@@ -5,11 +5,12 @@ import { transformVideo } from "../utils/transformVideoData";
 
 // 주어진 검색어에 대한 YouTube 동영상 검색 결과를 가져오는 커스텀 훅.
 
-export const useSearchVideos = (searchQuery, pageSize = 20) => {
+export const useSearchVideos = (searchQuery, pageSize = 12) => {
   const [videos, setVideos] = useState([]);
   const [cursor, setCursor] = useState(null);
   const [hasMore, setHasMore] = useState(true);
-  const [loading, setLoading] = useState(true);
+  const [loadingInitial, setLoadingInitial] = useState(false);
+  const [loadingMore, setLoadingMore] = useState(false);
   const [error, setError] = useState(null);
 
   const { ref: sentinelRef, inView } = useInView({
@@ -25,8 +26,10 @@ export const useSearchVideos = (searchQuery, pageSize = 20) => {
       return;
     }
 
+    const isInitial = replace || (videos.length === 0 && !cursorParam);
+    isInitial ? setLoadingInitial(true) : setLoadingMore(true);
+
     try {
-      setLoading(true);
       setError(null);
 
       // 1. 검색 API 호출
@@ -77,7 +80,7 @@ export const useSearchVideos = (searchQuery, pageSize = 20) => {
       console.error("Failed to fetch search results:", err);
       setError(err);
     } finally {
-      setLoading(false);
+      isInitial ? setLoadingInitial(false) : setLoadingMore(false);
     }
   };
 
@@ -93,10 +96,10 @@ export const useSearchVideos = (searchQuery, pageSize = 20) => {
 
   // 센티널이 보이면 다음 페이지
   useEffect(() => {
-    if (inView && hasMore && !loading) {
+    if (inView && hasMore && !loadingMore && !loadingInitial) {
       fetchPage(cursor);
     }
-  }, [inView, hasMore, loading, cursor]); // eslint-disable-line
+  }, [inView, hasMore, loadingMore, loadingInitial, cursor]); // eslint-disable-line
 
-  return { videos, loading, error, hasMore, sentinelRef };
+  return { videos, loadingMore, loadingInitial, error, hasMore, sentinelRef };
 };

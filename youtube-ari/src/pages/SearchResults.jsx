@@ -8,11 +8,11 @@ const SearchResults = () => {
   // URL에서 'search_query' 쿼리 파라미터(검색어)를 추출
   const queryParams = new URLSearchParams(location.search);
   const searchQuery = queryParams.get("search_query");
-  const { videos, loading, error, hasMore, sentinelRef } =
+  const { videos, loadingMore, loadingInitial, error, hasMore, sentinelRef } =
     useSearchVideos(searchQuery);
 
   // 로딩 상태 UI
-  if (loading) {
+  if (loadingInitial) {
     return (
       <div className="ml-[72px] pt-14">
         <VideoGridSkeleton count={12} />
@@ -59,9 +59,7 @@ const SearchResults = () => {
       )}
 
       {/* 추가 로딩 UI (다음 페이지 불러올 때) */}
-      {loading && videos.length > 0 && (
-        <div className="py-6 text-center text-gray-500">Loading more…</div>
-      )}
+      {loadingMore && videos.length > 0 && <VideoGridSkeleton count={12} />}
 
       {/* 끝까지 다 불러왔을 때 표시 */}
       {!hasMore && videos.length > 0 && (

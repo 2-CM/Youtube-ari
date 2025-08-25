@@ -7,7 +7,8 @@ export function usePopularVideos({ regionCode = "KR", pageSize = 12 } = {}) {
   const [videos, setVideos] = useState([]);
   const [cursor, setCursor] = useState(null);
   const [hasMore, setHasMore] = useState(true);
-  const [loading, setLoading] = useState(true);
+  const [loadingInitial, setLoadingInitial] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
   const [error, setError] = useState(null);
 
   const { ref: sentinelRef, inView } = useInView({
@@ -17,9 +18,12 @@ export function usePopularVideos({ regionCode = "KR", pageSize = 12 } = {}) {
   });
 
   const fetchPage = async (cursorParam = null) => {
-    try {
-      setLoading(true); // 로딩 시작
+    // 초기/추가 로딩 구분
+    const isInitial = videos.length === 0 && !cursorParam;
+    isInitial ? setLoadingInitial(true) : setLoadingMore(true);
 
+    try {
+      setError(null);
       // 1. 인기 동영상 가져오기
       const { items, nextCursor } = await getPopularVideos(
         pageSize,
@@ -57,7 +61,7 @@ export function usePopularVideos({ regionCode = "KR", pageSize = 12 } = {}) {
       console.error("동영상 및 채널 이미지 로딩 실패:", err);
       if (!cursorParam) setVideos([]); // 첫 로드 실패 시 초기화
     } finally {
-      setLoading(false); // 로딩 종료
+      isInitial ? setLoadingInitial(false) : setLoadingMore(false); // 로딩 종료
     }
   };
 
@@ -69,10 +73,10 @@ export function usePopularVideos({ regionCode = "KR", pageSize = 12 } = {}) {
 
   // 센티널 트리거
   useEffect(() => {
-    if (inView && hasMore && !loading) {
+    if (inView && hasMore && !loadingMore && !loadingInitial) {
       fetchPage(cursor);
     }
-  }, [inView, hasMore, loading, cursor]); // eslint-disable-line
+  }, [inView, hasMore, loadingMore, loadingInitial, cursor]); // eslint-disable-line
 
-  return { videos, loading, error, hasMore, sentinelRef };
+  return { videos, loadingInitial, loadingMore, error, hasMore, sentinelRef };
 }
