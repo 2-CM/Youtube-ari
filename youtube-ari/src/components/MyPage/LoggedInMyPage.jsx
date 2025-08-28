@@ -1,7 +1,7 @@
 import Avatar from "../common/Avatar";
 import useAuthContext from "../../hooks/useAuthContext";
 import { useWatchHistory } from "../../hooks/useWatchHistory";
-import { LogOut } from "lucide-react";
+import { LogOut, Trash2 } from "lucide-react";
 import VideoGridContent from "../VideoGrid/VideoGridContent";
 
 const LoggedInMyPage = ({ currentUser }) => {
@@ -61,6 +61,7 @@ const LoggedInMyPage = ({ currentUser }) => {
                 onClick={handleClearAll}
                 className="myPageBtn-common px-4 text-sm font-medium"
               >
+                <Trash2 className="mr-2 h-4 w-4" />
                 Clear all
               </button>
             </div>
