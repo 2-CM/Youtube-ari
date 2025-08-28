@@ -1,17 +1,29 @@
 import VideoCard from "../VideoGrid/VideoCard";
 import Avatar from "../common/Avatar";
-import mockVideos from "../../data/mockVideos";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, A11y } from "swiper/modules";
 import useAuthContext from "../../hooks/useAuthContext";
-
+import { useWatchHistory } from "../../hooks/useWatchHistory";
 import { ChevronRight, ChevronLeft, LogOut } from "lucide-react";
+import "swiper/css";
+import "swiper/css/navigation";
 
 const LoggedInMyPage = ({ currentUser }) => {
-  const historyVideos = mockVideos.slice(0, 4);
   const { logout } = useAuthContext();
+  const { visible: historyItems, clear } = useWatchHistory({
+    uid: currentUser?.uid,
+  }); // 최대 12개만 반환
+
+  const handleClearAll = () => {
+    if (historyItems.length === 0) return;
+    if (window.confirm("시청 기록을 모두 삭제할까요?")) {
+      clear(); // 로컬스토리지 비우고 state 갱신
+    }
+  };
 
   return (
     <>
-      <div className="ml-[72px] px-6 pt-14">
+      <div className="w-full max-w-7xl px-6 pl-[72px] pt-14">
         {/* 사용자 프로필 영역 */}
         <div className="flex pt-3">
           <div className="mr-3 flex-shrink-0 items-center">
@@ -33,37 +45,92 @@ const LoggedInMyPage = ({ currentUser }) => {
 
         {/* history 영역 */}
         <div className="mb-12 w-full pt-6">
-          <div className="mb-4 flex w-full justify-between">
+          <div className="mb-4 flex w-full flex-wrap items-center justify-between gap-y-2">
             <h1 className="ml-2">History</h1>
             <div className="flex items-center gap-2">
-              <button className="myPageBtn-common px-4 text-sm font-medium">
-                View all
+              <button
+                onClick={handleClearAll}
+                className="myPageBtn-common px-4 text-sm font-medium"
+              >
+                Clear all
               </button>
-              <button className="myPageBtn-common w-9">
+              <button
+                id="historyPrev"
+                className="myPageBtn-common w-9"
+                aria-label="이전"
+              >
                 <ChevronLeft strokeWidth={1} />
               </button>
-              <button className="myPageBtn-common w-9">
+              <button
+                id="historyNext"
+                className="myPageBtn-common w-9"
+                aria-label="다음"
+              >
                 <ChevronRight strokeWidth={1} />
               </button>
             </div>
           </div>
-          <div className="flex w-full gap-x-4 pt-1">
-            {historyVideos.map((video) => (
-              <div key={video.videoId} className="w-64 flex-shrink-0">
-                <VideoCard
-                  videoId={video.videoId}
-                  title={video.title}
-                  thumbnail={video.thumbnail}
-                  channelImage={video.channelImage}
-                  channelName={video.channelName}
-                  views={video.views}
-                  publishedAt={video.publishedAt}
-                  mode="relatedVideos"
-                  variant="grid"
-                />
-              </div>
-            ))}
-          </div>
+
+          {/* 비었을 때 */}
+          {historyItems.length === 0 ? (
+            <div className="ml-2 flex h-40 items-center justify-center rounded-lg border text-sm text-ytGray-70 dark:text-ytGray-20">
+              아직 시청 기록이 없어요.
+            </div>
+          ) : (
+            <div className="relative w-full overflow-hidden">
+              <Swiper
+                modules={[Navigation, A11y]}
+                spaceBetween={12}
+                slidesPerView={4}
+                slidesPerGroup={4}
+                speed={300}
+                navigation={{ nextEl: "#historyNext", prevEl: "#historyPrev" }}
+                allowTouchMove
+                className="w-full"
+                breakpoints={{
+                  1280: {
+                    slidesPerView: 4,
+                    slidesPerGroup: 4,
+                    spaceBetween: 12,
+                  },
+                  1024: {
+                    slidesPerView: 4,
+                    slidesPerGroup: 4,
+                    spaceBetween: 12,
+                  },
+                  900: {
+                    slidesPerView: 3,
+                    slidesPerGroup: 3,
+                    spaceBetween: 12,
+                  },
+                  640: {
+                    slidesPerView: 2,
+                    slidesPerGroup: 2,
+                    spaceBetween: 12,
+                  },
+                  0: { slidesPerView: 1, slidesPerGroup: 1, spaceBetween: 12 },
+                }}
+              >
+                {historyItems.map((it) => (
+                  <SwiperSlide
+                    key={it.id}
+                    className="!h-auto min-w-0 overflow-hidden"
+                  >
+                    <VideoCard
+                      videoId={it.id}
+                      title={it.title}
+                      thumbnail={it.thumb}
+                      channelImage={it.channelImage}
+                      channelName={it.channelTitle}
+                      views={it.views}
+                      publishedAt={it.publishedAt}
+                      mode="videoGrid"
+                    />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
+          )}
         </div>
       </div>
     </>
