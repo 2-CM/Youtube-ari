@@ -1,4 +1,4 @@
-import VideoCard from "./VideoCard";
+import VideoGridContent from "./VideoGridContent";
 import { usePopularVideos } from "../../hooks/usePopularVideos";
 import VideoGridSkeleton from "./VideoGridSkeleton";
 
@@ -26,27 +26,7 @@ const VideoGrid = () => {
 
   return (
     <div className="ml-[72px] pt-14">
-      <div className="mx-4 flex justify-center">
-        <div className="videoGridCols">
-          {videos
-            .filter((video) => video.videoId)
-            .map((video) => (
-              <VideoCard
-                key={video.videoId}
-                videoId={video.videoId}
-                channelId={video.channelId}
-                title={video.title}
-                thumbnail={video.thumbnail}
-                channelImage={video.channelImage}
-                channelName={video.channelName}
-                views={video.views}
-                publishedAt={video.publishedAt}
-                description={video.description}
-                mode="videoGrid"
-              />
-            ))}
-        </div>
-      </div>
+      <VideoGridContent videos={videos} />
 
       {/* 무한스크롤 센티널 */}
       {hasMore && (

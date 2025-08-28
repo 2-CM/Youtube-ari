@@ -1,17 +1,38 @@
-import VideoCard from "../VideoGrid/VideoCard";
 import Avatar from "../common/Avatar";
-import mockVideos from "../../data/mockVideos";
 import useAuthContext from "../../hooks/useAuthContext";
-
-import { ChevronRight, ChevronLeft, LogOut } from "lucide-react";
+import { useWatchHistory } from "../../hooks/useWatchHistory";
+import { LogOut, Trash2 } from "lucide-react";
+import VideoGridContent from "../VideoGrid/VideoGridContent";
 
 const LoggedInMyPage = ({ currentUser }) => {
-  const historyVideos = mockVideos.slice(0, 4);
   const { logout } = useAuthContext();
+  const { visible: historyItems, clear } = useWatchHistory({
+    uid: currentUser?.uid,
+  }); // 최대 12개만 반환
+
+  const handleClearAll = () => {
+    if (historyItems.length === 0) return;
+    if (window.confirm("시청 기록을 모두 삭제할까요?")) {
+      clear(); // 로컬스토리지 비우고 state 갱신
+    }
+  };
+
+  // 히스토리 포맷 -> VideoGrid에서 쓰는 포맷으로 변환
+  const videos = historyItems.map((it) => ({
+    videoId: it.id,
+    channelId: it.channelId ?? null,
+    title: it.title,
+    thumbnail: it.thumb,
+    channelImage: it.channelImage,
+    channelName: it.channelTitle,
+    views: it.views,
+    publishedAt: it.publishedAt,
+    description: "",
+  }));
 
   return (
     <>
-      <div className="ml-[72px] px-6 pt-14">
+      <div className="w-full px-6 pl-[72px] pt-14">
         {/* 사용자 프로필 영역 */}
         <div className="flex pt-3">
           <div className="mr-3 flex-shrink-0 items-center">
@@ -32,38 +53,28 @@ const LoggedInMyPage = ({ currentUser }) => {
         </div>
 
         {/* history 영역 */}
-        <div className="mb-12 w-full pt-6">
-          <div className="mb-4 flex w-full justify-between">
-            <h1 className="ml-2">History</h1>
+        <div className="mb-12 w-full pt-10">
+          <div className="mb-4 flex w-full flex-wrap items-center justify-between gap-y-2">
+            <span className="ml-2 text-3xl font-extrabold">History</span>
             <div className="flex items-center gap-2">
-              <button className="myPageBtn-common px-4 text-sm font-medium">
-                View all
-              </button>
-              <button className="myPageBtn-common w-9">
-                <ChevronLeft strokeWidth={1} />
-              </button>
-              <button className="myPageBtn-common w-9">
-                <ChevronRight strokeWidth={1} />
+              <button
+                onClick={handleClearAll}
+                className="myPageBtn-common px-4 text-sm font-medium"
+              >
+                <Trash2 className="mr-2 h-4 w-4" />
+                Clear all
               </button>
             </div>
           </div>
-          <div className="flex w-full gap-x-4 pt-1">
-            {historyVideos.map((video) => (
-              <div key={video.videoId} className="w-64 flex-shrink-0">
-                <VideoCard
-                  videoId={video.videoId}
-                  title={video.title}
-                  thumbnail={video.thumbnail}
-                  channelImage={video.channelImage}
-                  channelName={video.channelName}
-                  views={video.views}
-                  publishedAt={video.publishedAt}
-                  mode="relatedVideos"
-                  variant="grid"
-                />
-              </div>
-            ))}
-          </div>
+
+          {/* 비었을 때 */}
+          {videos.length === 0 ? (
+            <div className="ml-2 flex h-40 items-center justify-center rounded-lg border text-sm text-ytGray-70 dark:text-ytGray-20">
+              아직 시청 기록이 없어요.
+            </div>
+          ) : (
+            <VideoGridContent videos={videos} />
+          )}
         </div>
       </div>
     </>
