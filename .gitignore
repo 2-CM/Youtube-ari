@@ -199,4 +199,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# 모든 .env 관련 파일 무시
+.env*
+
 # End of https://www.toptal.com/developers/gitignore/api/windows,react,node,visualstudiocode
